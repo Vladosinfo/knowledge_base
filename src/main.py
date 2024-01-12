@@ -13,10 +13,10 @@ RESET = "\033[0m"
 # some comment
 
 
-def message_notice(notice, color = None):
+def message_notice(notice, color=None):
     color = color or GREEN
     return f"{color} {notice} {RESET}"
-    
+
 
 def message_warging(warning):
     return f"{RED} {warning} {RESET}"
@@ -56,7 +56,7 @@ def error(err):
 def add(com):
     count = len(com)
     if count < 3:
-        raise ValueError(WARNING_MESSAGES["name_phone"])  
+        raise ValueError(WARNING_MESSAGES["name_phone"])
 
     record_is = contacts_book.find(com[1])
     if record_is == None:
@@ -78,7 +78,7 @@ def contacts_book_fullness():
     if len(contacts_book) == 0:
         return message_warging(WARNING_MESSAGES["contacts_book_empty"])
     else:
-        return 1  
+        return 1
 
 
 def presence_name(com):
@@ -95,8 +95,9 @@ def show_all(com, search=None):
         message = "show_found"
     else:
         cont = contacts_book_fullness()
-        if cont != 1: return cont
-        
+        if cont != 1:
+            return cont
+
         iter_Item = contacts_book
         message = com
 
@@ -110,7 +111,8 @@ def show_all(com, search=None):
 @input_error
 def phone(com):
     cont = contacts_book_fullness()
-    if cont != 1: return cont
+    if cont != 1:
+        return cont
 
     if len(com) < 2:
         raise ValueError(WARNING_MESSAGES["name"])
@@ -137,10 +139,10 @@ def iter(com):
         items = contacts_book.iterator(int(com[1]), int(com[2]))
     else:
         items = contacts_book.iterator()
-        
+
     if items != None:
         contacts = ''
-        contacts += message_notice(MESSAGES[com[0]])            
+        contacts += message_notice(MESSAGES[com[0]])
         for item in items:
             contacts += '\n' + message_notice(f"{item}", BOLD)
         return contacts
@@ -157,7 +159,7 @@ def delete(com):
         contacts_book.delete(com[1])
         return message_warging(MESSAGES["delete"])
 
-    
+
 @input_error
 def search(com):
     res = contacts_book.search(com[1])
@@ -176,13 +178,20 @@ def daysbir(com):
         res = contact.days_to_birthday()
         return message_notice(f"{res}", BOLD)
 
+
+@input_error
+def add_email(com):
+    pass
+
+
 @input_error
 def help(com):
     res = ""
     for command in COMMAND_HANDLER.keys():
         # res += f"Command: {command}- description: {COMMAND_HANDLER_DESCRIPTION[command]}\n"
         res += message_notice(f"Command: {command}", GREEN)
-        res += message_notice(f"- description: {COMMAND_HANDLER_DESCRIPTION[command]}\n", BOLD)
+        res += message_notice(
+            f"- description: {COMMAND_HANDLER_DESCRIPTION[command]}\n", BOLD)
     return res
 
 
@@ -196,6 +205,7 @@ COMMAND_HANDLER = {
     "search": search,
     "delete": delete,
     "daysbir": daysbir,  # Count days to bithday
+    "add email": add_email,
     "help": help
 }
 
@@ -209,6 +219,8 @@ def command_handler(com):
 def parsing(user_input):
     if user_input.startswith("show all"):
         return show_all("show_all")
+    if user_input.startswith("add email"):
+        return add_email("add_email")
     return command_handler(user_input.split(" "))
 
 

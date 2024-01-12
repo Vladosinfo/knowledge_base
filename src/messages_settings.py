@@ -37,5 +37,6 @@ COMMAND_HANDLER_DESCRIPTION = {
     "search": "Search items by name or phone",
     "delete": "Delete item",
     "daysbir": "Count days to bithday",
+    "add email": "Add email to existing record",
     "help": "List of commands"
 }
