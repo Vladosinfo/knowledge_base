@@ -3,6 +3,8 @@ from classes.name import Name
 from classes.phone import Phone
 from classes.birthday import Birthday
 
+from classes.email import Email
+
 
 class Record():
     def __init__(self, name, date=None):
@@ -41,6 +43,9 @@ class Record():
         if p_obj:
             self.phones.remove(p_obj)
 
+    def set_email(self, email):
+        self.email = Email(email)
+
     def find_phone(self, phone_f):
         for phone in self.phones:
             if phone.value == phone_f:
@@ -48,4 +53,5 @@ class Record():
 
     def __str__(self):
         str_dat = f"; birthday: {self.date.value}" if self.date.value != None else ""
+        str_email = f"; email: {self.email.value}" if self.email else ""
         return f"Name: {self.name.value.title()}; phones: {'; '.join(p.value for p in self.phones)} {str_dat}"
