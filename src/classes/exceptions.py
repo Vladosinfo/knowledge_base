@@ -1,5 +1,8 @@
 class NotCorrectData(Exception):
     pass
 
-class NotCorrectPhone(Exception):
+class NotCorrectPhoneIsNotANumber(Exception):
+    pass
+
+class NotCorrectPhoneIsTwoShortOrLong(Exception):
     pass
