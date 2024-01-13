@@ -1,10 +1,14 @@
 import address_book_lib as abl
+import notes_book_lib as nbl
+from classes.record_notes import RecordNotes
 import messages_settings as message
 import classes.exceptions as ex
 from messages_settings import MESSAGES, EXIT_COMMANDS, WARNING_MESSAGES, COMMAND_HANDLER_DESCRIPTION
 import helpers.general_helpers as helpeer
+import helpers.serialization as serialize
 
 contacts_book = abl.AddressBook()
+notes_book = nbl.NotesBook()
 
 RED = "\033[91m"
 GREEN = "\033[92m"
@@ -193,6 +197,22 @@ def birthdays(com, days=7):
 
 
 @input_error
+def add_note(com):
+    title = input("\tInput title note >>> ")
+    desc = input("\tInput description note >>> ")
+    note_title = title.strip()
+    note_desc = desc.strip()
+    note_record = RecordNotes(note_title, note_desc)
+    notes_book.add_record(note_record)
+
+
+@input_error
+def search_note(com):
+    # if len(com) >= 2:
+    notes_book.search()
+
+
+@input_error
 def help(com):
     res = ""
     for command in COMMAND_HANDLER.keys():
@@ -213,6 +233,8 @@ COMMAND_HANDLER = {
     "delete": delete,
     "daysbir": daysbir,
     "birthdays": birthdays,
+    "add note": add_note,
+    "search note": search_note,
     "help": help
 }
 
@@ -226,17 +248,28 @@ def command_handler(com):
 def parsing(user_input):
     if user_input.startswith("show all"):
         return show_all("show_all")
+    if user_input.startswith("add note"):
+        return add_note("add_note")
+    if user_input.startswith("search note"):
+        return search_note("search_note")
     return command_handler(user_input.split(" "))
 
 
 def main():
-    contacts_book.unserialization()
+    # contacts_book.unserialization()
+    serialization_full_data = serialize.Serialization().unserialization()
+    full_content = serialization_full_data.get('full_content')
+    contacts_book.data = full_content.get("contacts")
+    notes_book.data = full_content.get("notes")
+
     while True:
         user_input = input("Input command >>> ")
         user_input = user_input.strip().lower()
         if user_input in EXIT_COMMANDS:
             print(exit(MESSAGES[user_input]))
-            contacts_book.serialization()
+            # contacts_book.serialization()
+            ob_serialize = serialize.Serialization()
+            ob_serialize.serialization(contacts_book.data, notes_book)
             break
         res = parsing(user_input)
         print(res)
