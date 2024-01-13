@@ -84,7 +84,7 @@ def contacts_book_fullness():
 def presence_name(com):
     contact = contacts_book.find(com[1])
     if contact == None:
-        return message_warging(WARNING_MESSAGES["missing_name"])
+        raise ValueError(WARNING_MESSAGES["missing_name"])
     else:
         return contact
 
@@ -214,7 +214,7 @@ COMMAND_HANDLER = {
     "search": search,
     "delete": delete,
     "daysbir": daysbir,  # Count days to bithday
-    "add email": add_email,
+    "add_email": add_email,
     "help": help
 }
 
@@ -228,9 +228,11 @@ def command_handler(com):
 def parsing(user_input):
     if user_input.startswith("show all"):
         return show_all("show_all")
-    if user_input.startswith("add email"):
-        return add_email("add_email")
-    return command_handler(user_input.split(" "))
+    if user_input.startswith("addemail"):
+        # Pass the user input to add_email, not the string "add_email"
+        return add_email(user_input.split(" "))
+    # Ensure command_handler receives lowercase input
+    return command_handler(user_input.lower().split(" "))
 
 
 def main():

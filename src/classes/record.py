@@ -11,7 +11,7 @@ class Record():
         self.name = Name(name)  # Mandatory
         self.phones = []
         self.date = Birthday(date)
-        self.email = Email(email) if email else None
+        self.email = Email(email) if email is not None else None
 
     def add_phone(self, phone):
         self.phones.append(Phone(phone))
@@ -44,7 +44,9 @@ class Record():
             self.phones.remove(p_obj)
 
     def set_email(self, email):
+        print("Setting email:", email)
         self.email = Email(email)
+        print("Email set:", self.email.value)
 
     def find_phone(self, phone_f):
         for phone in self.phones:
@@ -53,5 +55,5 @@ class Record():
 
     def __str__(self):
         str_dat = f"; birthday: {self.date.value}" if self.date.value != None else ""
-        str_email = f"; email: {self.email.value}" if self.email else ""
+        str_email = f"; email: {self.email.value}" if self.email is not None and self.email.value is not None else ""
         return f"Name: {self.name.value.title()}; phones: {'; '.join(p.value for p in self.phones)} {str_dat}"

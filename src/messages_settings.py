@@ -5,6 +5,7 @@ MESSAGES = {
     "exit": "Good bye!",
     "add": "Your contact has been added",
     "add_more": "One more phone has been added",
+    "add_email": "Email succesfully added to your contact ",
     "change": "Your contact has been changed",
     "phone": "It's your phone number: ",
     "show_all": "These are all contacts:",
@@ -19,6 +20,7 @@ WARNING_MESSAGES = {
     "correct_command": "Enter correct command",
     "name": "Enter user name",
     "name_phone": "Give me name and phone please",
+    "name_email": " Give me email, please",
     "not_correct_phone": "Not correct phone",
     "missing_name": "This name is missing in contact book",
     "contacts_book_empty": "Contacts book is empty yet.",
@@ -37,6 +39,6 @@ COMMAND_HANDLER_DESCRIPTION = {
     "search": "Search items by name or phone",
     "delete": "Delete item",
     "daysbir": "Count days to bithday",
-    "add email": "Add email to existing record",
+    "add_email": "Add email to existing record",
     "help": "List of commands"
 }
