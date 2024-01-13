@@ -26,6 +26,9 @@ class RecordNotes():
     def description(self, description):
         self._description = description
 
-    # @tags.setter
-    # def tags(self, tags):
-    #     self.tags = tags
+    @tags.setter
+    def tags(self, tags):
+        
+        # for symbol in self.title:
+        #     print si
+        # self._tags = tags
