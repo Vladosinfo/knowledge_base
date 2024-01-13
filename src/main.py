@@ -181,7 +181,16 @@ def daysbir(com):
 
 @input_error
 def add_email(com):
-    pass
+    if len(com) < 3:
+        raise ValueError(WARNING_MESSAGES["name_email"])
+
+    record_is = presence_name(com)
+    if record_is is not None and isinstance(record_is, abl.Record):
+        record_is.set_email(com[2])
+        contacts_book.add_record(record_is)
+        return message_notice(MESSAGES["add_email"])
+    else:
+        return message_warging(WARNING_MESSAGES["missing_name"])
 
 
 @input_error

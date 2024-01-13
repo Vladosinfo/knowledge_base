@@ -7,7 +7,7 @@ from classes.email import Email
 
 
 class Record():
-    def __init__(self, name, date=None):
+    def __init__(self, name, date=None, email=None):
         self.name = Name(name)  # Mandatory
         self.phones = []
         self.date = Birthday(date)
