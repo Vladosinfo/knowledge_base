@@ -6,6 +6,9 @@ import classes.exceptions as ex
 from messages_settings import MESSAGES, EXIT_COMMANDS, WARNING_MESSAGES, COMMAND_HANDLER_DESCRIPTION
 import helpers.general_helpers as helpeer
 import helpers.serialization as serialize
+from prompt_toolkit import prompt
+from prompt_toolkit.completion import WordCompleter
+
 
 contacts_book = abl.AddressBook()
 notes_book = nbl.NotesBook()
@@ -254,6 +257,9 @@ COMMAND_HANDLER = {
     "help": help
 }
 
+# Completer for commands
+command_completer = WordCompleter(COMMAND_HANDLER.keys(), ignore_case=True)
+
 
 def command_handler(com):
     handler = COMMAND_HANDLER.get(com[0], error)
@@ -279,7 +285,8 @@ def main():
     notes_book.data = full_content.get("notes")
 
     while True:
-        user_input = input("Input command >>> ")
+        # user_input = input("Input command >>> ")
+        user_input = prompt(">>>", completer=command_completer) # input via command completer
         user_input = user_input.strip().lower()
         if user_input in EXIT_COMMANDS:
             print(exit(MESSAGES[user_input]))
