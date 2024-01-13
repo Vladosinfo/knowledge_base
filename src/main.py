@@ -85,7 +85,7 @@ def contacts_book_fullness():
 def presence_name(com):
     contact = contacts_book.find(com[1])
     if contact == None:
-        return message_warging(WARNING_MESSAGES["missing_name"])
+        raise ValueError(WARNING_MESSAGES["missing_name"])
     else:
         return contact
 
@@ -131,6 +131,19 @@ def change(com):
 
 
 @input_error
+def change_birth(com):
+    if len(com) < 3:
+        raise ValueError(WARNING_MESSAGES["name_birth"])
+    birth_is = presence_name(com)
+    print(birth_is)
+    if birth_is:
+        birth_is.edit_birthday(com[2])
+        return message_notice(MESSAGES[com[0]])
+    else:
+        raise ValueError(WARNING_MESSAGES["missing_name"])
+
+
+@input_error
 def iter(com):
     contacts_book.list_creator()
     count = len(com)
@@ -138,7 +151,7 @@ def iter(com):
         items = contacts_book.iterator(int(com[1]), int(com[2]))
     else:
         items = contacts_book.iterator()
-        
+
     if items != None:
         contacts = ''
         contacts += message_notice(MESSAGES[com[0]])            
@@ -158,7 +171,7 @@ def delete(com):
         contacts_book.delete(com[1])
         return message_warging(MESSAGES["delete"])
 
-    
+
 @input_error
 def search(com):
     res = contacts_book.search(com[1])
@@ -208,6 +221,7 @@ COMMAND_HANDLER = {
     "hello": message,
     "add": add,
     "change": change,
+    "change_birth": change_birth,
     "phone": phone,
     "show all": show_all,
     "iter": iter,
