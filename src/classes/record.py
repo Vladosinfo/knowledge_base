@@ -2,6 +2,7 @@ from datetime import date, datetime
 from classes.name import Name
 from classes.phone import Phone
 from classes.birthday import Birthday
+from classes.exceptions import NotCorrectData
 
 
 class Record():
@@ -35,7 +36,13 @@ class Record():
             phone_obj.value = phone_new
         else:
             raise ValueError
-
+    
+    def edit_birthday(self, new_birth):
+        try:
+            self.date.value = new_birth
+        except NotCorrectData:
+            raise ValueError("Not corrct data. Example: 21-12-2021")
+            
 
     def remove_phone(self, phone_r):
         p_obj = self.find_phone(phone_r)
