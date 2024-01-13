@@ -44,5 +44,7 @@ COMMAND_HANDLER_DESCRIPTION = {
     "delete": "Delete item",
     "daysbir": "Count days to bithday",
     "birthdays": "List of users whose birthday is close",
+    "add note": "Add new note to dictionary notes",
+    "search note": "Search notes",
     "help": "List of commands"
 }

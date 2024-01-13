@@ -1,13 +1,7 @@
 from collections import UserDict
-from time import strptime
-# from datetime import date, datetime
+# from time import strptime
 import pickle
 from pathlib import Path
-# import classes.exceptions as ex
-# from classes.field import Field
-# from classes.name import Name
-# from classes.phone import Phone
-# from classes.birthday import Birthday
 from classes.record import Record
 
 class AddressBook(UserDict):
@@ -15,11 +9,11 @@ class AddressBook(UserDict):
         # self.list_items = []
         self.list_count = 0
         self.data = {}
-        self.__abook_file = "book_file.bin"
+        # self.__abook_file = "book_file2.bin"
 
     def add_record(self, value):
-        # self.data[value.name.value] = value.phones
         self.data[value.name.value] = value
+        # print(f"add_record: {self.data}")
 
     def find(self, name):
         if name in self.data.keys():
@@ -44,18 +38,18 @@ class AddressBook(UserDict):
         if self.list_count > 0 and from_el < self.list_count:
             return (x for x in self.list_items[from_el:to_el])
 
-    def serialization(self):
-        with open(self.__abook_file, "wb") as fh:
-            pickle.dump(self.data, fh)
+    # def serialization(self):
+    #     with open(self.__abook_file, "wb") as fh:
+    #         pickle.dump(self.data, fh)
 
-    def check_file_exist(self):
-        return Path(self.__abook_file).exists()
+    # def check_file_exist(self):
+    #     return Path(self.__abook_file).exists()
 
-    def unserialization(self):
-        if self.check_file_exist():
-            with open(self.__abook_file, "rb") as fh:
-                self.data = pickle.load(fh)
-            return self.data
+    # def unserialization(self):
+    #     if self.check_file_exist():
+    #         with open(self.__abook_file, "rb") as fh:
+    #             self.data = pickle.load(fh)
+    #         return self.data
 
     def search(self, str):
         searched_items = {}
@@ -71,8 +65,8 @@ class AddressBook(UserDict):
     def help(self):
         return 
 
-def main():
-    pass
+# def main():
+#     pass
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
