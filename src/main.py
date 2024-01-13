@@ -16,10 +16,10 @@ BOLD = '\033[1m'
 RESET = "\033[0m"
 
 
-def message_notice(notice, color = None):
+def message_notice(notice, color=None):
     color = color or GREEN
     return f"{color} {notice} {RESET}"
-    
+
 
 def message_warging(warning):
     return f"{RED} {warning} {RESET}"
@@ -61,7 +61,7 @@ def error(err):
 def add(com):
     count = len(com)
     if count < 3:
-        raise ValueError(WARNING_MESSAGES["name_phone"])  
+        raise ValueError(WARNING_MESSAGES["name_phone"])
 
     record_is = contacts_book.find(com[1])
     if record_is == None:
@@ -83,7 +83,7 @@ def contacts_book_fullness():
     if len(contacts_book) == 0:
         return message_warging(WARNING_MESSAGES["contacts_book_empty"])
     else:
-        return 1  
+        return 1
 
 
 def presence_name(com):
@@ -100,8 +100,9 @@ def show_all(com, search=None):
         message = "show_found"
     else:
         cont = contacts_book_fullness()
-        if cont != 1: return cont
-        
+        if cont != 1:
+            return cont
+
         iter_Item = contacts_book
         message = com
 
@@ -115,7 +116,8 @@ def show_all(com, search=None):
 @input_error
 def phone(com):
     cont = contacts_book_fullness()
-    if cont != 1: return cont
+    if cont != 1:
+        return cont
 
     if len(com) < 2:
         raise ValueError(WARNING_MESSAGES["name"])
@@ -158,7 +160,7 @@ def iter(com):
 
     if items != None:
         contacts = ''
-        contacts += message_notice(MESSAGES[com[0]])            
+        contacts += message_notice(MESSAGES[com[0]])
         for item in items:
             contacts += '\n' + message_notice(f"{item}", BOLD)
         return contacts
@@ -196,15 +198,30 @@ def daysbir(com):
 
 
 @input_error
+def add_address(com):
+    if len(com) < 3:
+        raise ValueError(WARNING_MESSAGES["name_address"])
+
+    record_is = presence_name(com)
+    if record_is is not None and isinstance(record_is, abl.Record):
+        record_is.set_address(com[2])
+        contacts_book.add_record(record_is)
+        return message_notice(MESSAGES["added_address"])
+    else:
+        return message_warging(WARNING_MESSAGES["missing_address"])
+
+
+@input_error
 def birthdays(com, days=7):
     search_days = int(com[1]) if len(com) > 1 else days
     res = ""
     for item in contacts_book.values():
         if item.date.value != None:
             days_count = helpeer.list_days_to_birthday(item.date.value)
-            if days_count <= search_days:        
-                res += message_notice(f"{item.name.value.title()} after {days_count} day(s)\n", BOLD)
-                
+            if days_count <= search_days:
+                res += message_notice(
+                    f"{item.name.value.title()} after {days_count} day(s)\n", BOLD)
+
     if res != "":
         return message_notice(MESSAGES["list_days_to_birthday"]+"\n", GREEN) + res
     else:
@@ -233,7 +250,8 @@ def help(com):
     for command in COMMAND_HANDLER.keys():
         # res += f"Command: {command}- description: {COMMAND_HANDLER_DESCRIPTION[command]}\n"
         res += message_notice(f"Command: {command}", GREEN)
-        res += message_notice(f"- description: {COMMAND_HANDLER_DESCRIPTION[command]}\n", BOLD)
+        res += message_notice(
+            f"- description: {COMMAND_HANDLER_DESCRIPTION[command]}\n", BOLD)
     return res
 
 
@@ -251,6 +269,7 @@ COMMAND_HANDLER = {
     "birthdays": birthdays,
     "add note": add_note,
     "search note": search_note,
+    "add_address": add_address,
     "help": help
 }
 
@@ -268,6 +287,8 @@ def parsing(user_input):
         return add_note("add_note")
     if user_input.startswith("search note"):
         return search_note("search_note")
+    if user_input.startswith("add address"):
+        return add_address("add_address")
     return command_handler(user_input.split(" "))
 
 

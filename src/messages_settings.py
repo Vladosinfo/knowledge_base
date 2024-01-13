@@ -5,6 +5,7 @@ MESSAGES = {
     "exit": "Good bye!",
     "add": "Your contact has been added",
     "add_more": "One more phone has been added",
+    "added_address": "Address has been sucessfully added to your contact",
     "change": "Your contact has been changed",
     "change_birth": "Birthday has been changed",
     "phone": "It's your phone number: ",
@@ -22,9 +23,10 @@ WARNING_MESSAGES = {
     "name": "Enter user name",
     "name_phone": "Give me name and phone please. Syntax: >>> add nameUser phoneNumber",
     "name_birth": "Give me name, old birthday and new. Syntax: >>> change_birth 'name' 'old_birth' 'new_birth'",
+    "name_address": "Give me address please. Syntax: >>> add_address nameUser address",
     "not_correct_phone_is_not_a_number": "Pleace, put a number",
     "not_correct_phone_short_long": "Pleace, put more than 9 numebres, but no more than 13",
-    "missing_name": "This name is missing in contact book", 
+    "missing_name": "This name is missing in contact book",
     "contacts_book_empty": "Contacts book is empty yet.",
     "iter_no_result": "There are no records in this range",
     "show_found_empty": "Search did not return any results.",
@@ -46,5 +48,6 @@ COMMAND_HANDLER_DESCRIPTION = {
     "birthdays": "List of users whose birthday is close",
     "add note": "Add new note to dictionary notes",
     "search note": "Search notes",
+    "add_address": "Adding address to existing contact",
     "help": "List of commands"
 }
