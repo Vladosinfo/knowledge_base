@@ -28,7 +28,7 @@ class RecordNotes():
 
     @tags.setter
     def tags(self, tags):
-        
+        pass
         # for symbol in self.title:
         #     print si
         # self._tags = tags
