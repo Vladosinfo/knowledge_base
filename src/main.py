@@ -33,8 +33,10 @@ def input_error(func):
             return message_warging(f"Error: {err}")
         except ex.NotCorrectData as err:
             return message_warging(f"Error: {WARNING_MESSAGES['not_correct_data']}")
-        except ex.NotCorrectPhone as err:
-            return message_warging(f"Error: {WARNING_MESSAGES['not_correct_phone']}")
+        except ex.NotCorrectPhoneIsNotANumber as err:
+            return message_warging(f"Error: {WARNING_MESSAGES['not_correct_phone_is_not_a_number']}")
+        except ex.NotCorrectPhoneIsTwoShortOrLong as err:
+            return message_warging(f"Error: {WARNING_MESSAGES['not_correct_phone_short_long']}")
     return wrapper
 
 
