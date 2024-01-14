@@ -70,5 +70,7 @@ class Record():
 
     def __str__(self):
         str_dat = f"; birthday: {self.date.value}" if self.date.value != None else ""
+        # str_email = f"; email: {self.email.value}" if self.email.value != None else ""
         str_email = f"; email: {self.email.value}" if self.email is not None and self.email.value is not None else ""
-        return f"Name: {self.name.value.title()}; phones: {'; '.join(p.value for p in self.phones)} {str_dat}"
+        return f"Name: {self.name.value.title()}; phones: {'; '.join(p.value for p in self.phones)}{str_dat}{str_email}"
+        # return f"Name: {self.name.value.title()}; phones: {'; '.join(p.value for p in self.phones)} {str_dat}"

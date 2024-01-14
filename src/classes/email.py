@@ -12,7 +12,8 @@ class Email(Field):
     def value(self):
         return self._value
 
-    @value.setter
+    # @value.setter
+    @Field.value.setter
     def value(self, email):
         if self.validate(email):
             self._value = email
