@@ -38,18 +38,6 @@ class AddressBook(UserDict):
         if self.list_count > 0 and from_el < self.list_count:
             return (x for x in self.list_items[from_el:to_el])
 
-    # def serialization(self):
-    #     with open(self.__abook_file, "wb") as fh:
-    #         pickle.dump(self.data, fh)
-
-    # def check_file_exist(self):
-    #     return Path(self.__abook_file).exists()
-
-    # def unserialization(self):
-    #     if self.check_file_exist():
-    #         with open(self.__abook_file, "rb") as fh:
-    #             self.data = pickle.load(fh)
-    #         return self.data
 
     def search(self, str):
         searched_items = {}

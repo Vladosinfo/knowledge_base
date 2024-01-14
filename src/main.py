@@ -212,6 +212,24 @@ def daysbir(com):
 
 
 @input_error
+def add_address(com):
+    if len(com) < 2:
+        raise ValueError(WARNING_MESSAGES["name_address"])
+
+    record_is = presence_name(com)
+    if record_is is not None and isinstance(record_is, abl.Record):
+
+        address = input("\tInput address >>> ")
+        address = address.strip()
+
+        record_is.set_address(address)
+        contacts_book.add_record(record_is)
+        return message_notice(MESSAGES["added_address"])
+    else:
+        return message_warging(WARNING_MESSAGES["missing_address"])
+
+
+@input_error
 def add_email(com):
     if len(com) < 3:
         raise ValueError(WARNING_MESSAGES["name_email"])
@@ -231,11 +249,9 @@ def birthdays(com, days=7):
     for item in contacts_book.values():
         if item.date.value != None:
             days_count = helpeer.list_days_to_birthday(item.date.value)
-            if days_count <= search_days:
-                res += message_notice(
-                    f"{item.name.value.title()} after {days_count} day(s)\n", BOLD
-                )
-
+            if days_count <= search_days:        
+                res += message_notice(f"{item.name.value.title()} after {days_count} day(s)\n", BOLD)
+                
     if res != "":
         return message_notice(MESSAGES["list_days_to_birthday"] + "\n", GREEN) + res
     else:
@@ -256,6 +272,11 @@ def add_note(com):
 def search_note(com):
     # if len(com) >= 2:
     notes_book.search()
+
+@input_error
+def search_notes_by_tag(com):
+    print("search notes by tag")
+
 
 
 @input_error
@@ -292,7 +313,7 @@ COMMAND_HANDLER = {
     "birthdays": birthdays,
     "add note": add_note,
     "search note": search_note,
-    "help": help,
+    "help": help
 }
 
 # Completer for commands
@@ -308,13 +329,23 @@ def command_handler(com):
 def parsing(user_input):
     if user_input.startswith("show all"):
         return show_all("show_all")
-    if user_input.startswith("addemail"):
+    
+    if user_input.startswith("add_email"):
         # Pass the user input to add_email, not the string "add_email"
         return add_email(user_input.split(" "))
+    
     if user_input.startswith("add note"):
         return add_note("add_note")
+    
+    if user_input.startswith("search notes by tag"):
+        return search_notes_by_tag(user_input.split(" "))
+    
     if user_input.startswith("search note"):
         return search_note("search_note")
+
+    if user_input.startswith("add_address"):
+        return add_address(user_input.split(" "))
+
     return command_handler(user_input.split(" "))
 
 
@@ -323,21 +354,17 @@ def parsing(user_input):
 
 
 def main():
-    # contacts_book.unserialization()
     serialization_full_data = serialize.Serialization().unserialization()
-    full_content = serialization_full_data.get("full_content")
+    full_content = serialization_full_data.get('full_content')
     contacts_book.data = full_content.get("contacts")
     notes_book.data = full_content.get("notes")
 
     while True:
         # user_input = input("Input command >>> ")
-        user_input = prompt(
-            ">>>", completer=command_completer
-        )  # input via command completer
+        user_input = prompt(">>>", completer=command_completer) # input via command completer
         user_input = user_input.strip().lower()
         if user_input in EXIT_COMMANDS:
             print(exit(MESSAGES[user_input]))
-            # contacts_book.serialization()
             ob_serialize = serialize.Serialization()
             ob_serialize.serialization(contacts_book.data, notes_book)
             break

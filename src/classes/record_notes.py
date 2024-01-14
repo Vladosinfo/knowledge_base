@@ -2,9 +2,10 @@ class RecordNotes():
     def __init__(self, title, description):
         self._title = None
         self._description = None
-        self._tags = []
+        self._tags = None
         self.title = title
         self.description = description
+        self.tags = title + " " + description
 
     @property
     def title(self):
@@ -16,7 +17,7 @@ class RecordNotes():
     
     @property
     def tags(self):
-        return self.tags
+        return self._tags
     
     @title.setter
     def title(self, title):
@@ -28,7 +29,14 @@ class RecordNotes():
 
     @tags.setter
     def tags(self, tags):
-        pass
-        # for symbol in self.title:
-        #     print si
-        # self._tags = tags
+        tags_from_text = []
+        substring = '#'
+        substrings = tags.split(substring)
+        
+        print(f"substrings: {tags}")
+        if len(tags) > 0:
+            for item in substrings[1:]:
+                temp_arr = item.split(" ")
+                tags_from_text.append(temp_arr[0].strip())
+                continue
+        self._tags = tags_from_text
