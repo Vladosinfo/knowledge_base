@@ -201,6 +201,24 @@ def daysbir(com):
 
 
 @input_error
+def add_address(com):
+    if len(com) < 2:
+        raise ValueError(WARNING_MESSAGES["name_address"])
+
+    record_is = presence_name(com)
+    if record_is is not None and isinstance(record_is, abl.Record):
+
+        address = input("\tInput address >>> ")
+        address = address.strip()
+
+        record_is.set_address(address)
+        contacts_book.add_record(record_is)
+        return message_notice(MESSAGES["added_address"])
+    else:
+        return message_warging(WARNING_MESSAGES["missing_address"])
+
+
+@input_error
 def add_email(com):
     if len(com) < 3:
         raise ValueError(WARNING_MESSAGES["name_email"])
@@ -213,16 +231,17 @@ def add_email(com):
     else:
         return message_warging(WARNING_MESSAGES["missing_name"])
 
-      
+
 def birthdays(com, days=7):
     search_days = int(com[1]) if len(com) > 1 else days
     res = ""
     for item in contacts_book.values():
         if item.date.value != None:
             days_count = helpeer.list_days_to_birthday(item.date.value)
-            if days_count <= search_days:        
-                res += message_notice(f"{item.name.value.title()} after {days_count} day(s)\n", BOLD)
-                
+            if days_count <= search_days:
+                res += message_notice(
+                    f"{item.name.value.title()} after {days_count} day(s)\n", BOLD)
+
     if res != "":
         return message_notice(MESSAGES["list_days_to_birthday"]+"\n", GREEN) + res
     else:
@@ -271,6 +290,7 @@ COMMAND_HANDLER = {
     "birthdays": birthdays,
     "add note": add_note,
     "search note": search_note,
+    "add_address": add_address,
     "help": help,
     "exit, close, good bye": message
 }
@@ -295,6 +315,8 @@ def parsing(user_input):
         return add_note("add_note")
     if user_input.startswith("search note"):
         return search_note("search_note")
+    if user_input.startswith("add_address"):
+        return add_address(user_input.split(" "))
     return command_handler(user_input.split(" "))
   
   # Ensure command_handler receives lowercase input
