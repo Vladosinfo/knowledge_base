@@ -24,7 +24,7 @@ WARNING_MESSAGES = {
     "name_email": " Give me email, please",
     #"not_correct_phone": "Not correct phone",
     "name_phone": "Give me name and phone please. Syntax: >>> add nameUser phoneNumber",
-    "name_birth": "Give me name, old birthday and new. Syntax: >>> change_birth 'name' 'old_birth' 'new_birth'",
+    "name_birth": "Give me name and new birthday. Syntax: >>> change_birth 'name' 'new_birth'",
     "not_correct_phone_is_not_a_number": "Pleace, put a number",
     "not_correct_phone_short_long": "Pleace, put more than 9 numebres, but no more than 13",
     "missing_name": "This name is missing in contact book", 
