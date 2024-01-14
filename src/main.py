@@ -199,12 +199,16 @@ def daysbir(com):
 
 @input_error
 def add_address(com):
-    if len(com) < 3:
+    if len(com) < 2:
         raise ValueError(WARNING_MESSAGES["name_address"])
 
     record_is = presence_name(com)
     if record_is is not None and isinstance(record_is, abl.Record):
-        record_is.set_address(com[2])
+
+        address = input("\tInput address >>> ")
+        address = address.strip()
+
+        record_is.set_address(address)
         contacts_book.add_record(record_is)
         return message_notice(MESSAGES["added_address"])
     else:
@@ -283,12 +287,12 @@ def command_handler(com):
 def parsing(user_input):
     if user_input.startswith("show all"):
         return show_all("show_all")
-    if user_input.startswith("add note"):
+    if user_input.startswith("add_note"):
         return add_note("add_note")
     if user_input.startswith("search note"):
         return search_note("search_note")
-    if user_input.startswith("add address"):
-        return add_address("add_address")
+    if user_input.startswith("add_address"):
+        return add_address(user_input.split(" "))
     return command_handler(user_input.split(" "))
 
 
@@ -296,8 +300,9 @@ def main():
     # contacts_book.unserialization()
     serialization_full_data = serialize.Serialization().unserialization()
     full_content = serialization_full_data.get('full_content')
-    contacts_book.data = full_content.get("contacts")
-    notes_book.data = full_content.get("notes")
+    if full_content != None:
+        contacts_book.data = full_content.get("contacts")
+        notes_book.data = full_content.get("notes")
 
     while True:
         user_input = input("Input command >>> ")
