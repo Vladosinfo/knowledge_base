@@ -30,8 +30,7 @@ Installation
 1.Clone the repository:
 git clone https://github.com/Vladosinfo/knowledge_base
 2.Instalation in consol: 
-pip install -r requirements.txt,
-pip install prompt_toolkit.
+pip install -r requirements.txt.
 3.Navigate to the project directory:
 cd address-book
 4.Run the application:
