@@ -310,7 +310,9 @@ COMMAND_HANDLER = {
     "search notes by tag": search_notes_by_tag,    
     "add_address": add_address,
     "help": help,
-    "exit, close, good bye": message
+    "exit": message,
+    "close": message,
+    "good bye": message
 }
 
 # Completer for commands
