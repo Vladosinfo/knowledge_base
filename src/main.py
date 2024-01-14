@@ -287,7 +287,7 @@ def command_handler(com):
 def parsing(user_input):
     if user_input.startswith("show all"):
         return show_all("show_all")
-    if user_input.startswith("addemail"):
+    if user_input.startswith("add_email"):
         # Pass the user input to add_email, not the string "add_email"
         return add_email(user_input.split(" "))
     if user_input.startswith("add note"):
@@ -301,19 +301,18 @@ def parsing(user_input):
 
 
 def main():
-    # contacts_book.unserialization()
     serialization_full_data = serialize.Serialization().unserialization()
     full_content = serialization_full_data.get('full_content')
-    contacts_book.data = full_content.get("contacts")
-    notes_book.data = full_content.get("notes")
+    if full_content != None:
+        contacts_book.data = full_content.get("contacts")
+        notes_book.data = full_content.get("notes")
 
     while True:
         # user_input = input("Input command >>> ")
-        user_input = prompt(">>>", completer=command_completer) # input via command completer
+        user_input = prompt(">>> ", completer=command_completer) # input via command completer
         user_input = user_input.strip().lower()
         if user_input in EXIT_COMMANDS:
             print(exit(MESSAGES[user_input]))
-            # contacts_book.serialization()
             ob_serialize = serialize.Serialization()
             ob_serialize.serialization(contacts_book.data, notes_book)
             break
