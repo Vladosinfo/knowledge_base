@@ -47,13 +47,9 @@ def input_error(func):
         except ex.NotCorrectData as err:
             return message_warging(f"Error: {WARNING_MESSAGES['not_correct_data']}")
         except ex.NotCorrectPhoneIsNotANumber as err:
-            return message_warging(
-                f"Error: {WARNING_MESSAGES['not_correct_phone_is_not_a_number']}"
-            )
+            return message_warging(f"Error: {WARNING_MESSAGES['not_correct_phone_is_not_a_number']}")
         except ex.NotCorrectPhoneIsTwoShortOrLong as err:
-            return message_warging(
-                f"Error: {WARNING_MESSAGES['not_correct_phone_short_long']}"
-            )
+            return message_warging(f"Error: {WARNING_MESSAGES['not_correct_phone_short_long']}")
 
     return wrapper
 
@@ -285,9 +281,7 @@ def help(com):
     for command in COMMAND_HANDLER.keys():
         # res += f"Command: {command}- description: {COMMAND_HANDLER_DESCRIPTION[command]}\n"
         res += message_notice(f"Command: {command}", GREEN)
-        res += message_notice(
-            f"- description: {COMMAND_HANDLER_DESCRIPTION[command]}\n", BOLD
-        )
+        res += message_notice(f"- description: {COMMAND_HANDLER_DESCRIPTION[command]}\n", BOLD)
     return res
 
 
@@ -313,7 +307,10 @@ COMMAND_HANDLER = {
     "birthdays": birthdays,
     "add note": add_note,
     "search note": search_note,
-    "help": help
+    "search notes by tag": search_notes_by_tag,    
+    "add_address": add_address,
+    "help": help,
+    "exit, close, good bye": message
 }
 
 # Completer for commands
@@ -356,12 +353,13 @@ def parsing(user_input):
 def main():
     serialization_full_data = serialize.Serialization().unserialization()
     full_content = serialization_full_data.get('full_content')
-    contacts_book.data = full_content.get("contacts")
-    notes_book.data = full_content.get("notes")
+    if full_content != None:
+        contacts_book.data = full_content.get("contacts")
+        notes_book.data = full_content.get("notes")
 
     while True:
         # user_input = input("Input command >>> ")
-        user_input = prompt(">>>", completer=command_completer) # input via command completer
+        user_input = prompt(">>> ", completer=command_completer) # input via command completer
         user_input = user_input.strip().lower()
         if user_input in EXIT_COMMANDS:
             print(exit(MESSAGES[user_input]))
