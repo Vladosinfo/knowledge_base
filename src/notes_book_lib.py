@@ -12,5 +12,5 @@ class NotesBook(UserDict):
 
     def search(self):
         for key, val in self.data.items():
-            print(f"key: {key} | title: {val.title} | description: {val.description}")
+            print(f"key: {key} | title: {val.title} | description: {val.description} | tags: {val.tags}")
     

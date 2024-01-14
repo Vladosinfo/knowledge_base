@@ -244,6 +244,11 @@ def search_note(com):
     # if len(com) >= 2:
     notes_book.search()
 
+@input_error
+def search_notes_by_tag(com):
+    print("search notes by tag")
+
+
 
 @input_error
 def help(com):
@@ -271,6 +276,7 @@ COMMAND_HANDLER = {
     "birthdays": birthdays,
     "add note": add_note,
     "search note": search_note,
+    "search notes by tag": search_notes_by_tag,
     "help": help
 }
 
@@ -287,13 +293,21 @@ def command_handler(com):
 def parsing(user_input):
     if user_input.startswith("show all"):
         return show_all("show_all")
+    
     if user_input.startswith("add_email"):
         # Pass the user input to add_email, not the string "add_email"
         return add_email(user_input.split(" "))
+    
     if user_input.startswith("add note"):
         return add_note("add_note")
+    
+    if user_input.startswith("search notes by tag"):
+        return search_notes_by_tag(user_input.split(" "))
+    
     if user_input.startswith("search note"):
         return search_note("search_note")
+    
+    
     return command_handler(user_input.split(" "))
   
   # Ensure command_handler receives lowercase input
