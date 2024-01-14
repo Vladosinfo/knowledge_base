@@ -6,6 +6,9 @@ import classes.exceptions as ex
 from messages_settings import MESSAGES, EXIT_COMMANDS, WARNING_MESSAGES, COMMAND_HANDLER_DESCRIPTION
 import helpers.general_helpers as helpeer
 import helpers.serialization as serialize
+from prompt_toolkit import prompt
+from prompt_toolkit.completion import WordCompleter
+
 
 contacts_book = abl.AddressBook()
 notes_book = nbl.NotesBook()
@@ -216,6 +219,19 @@ def add_address(com):
 
 
 @input_error
+def add_email(com):
+    if len(com) < 3:
+        raise ValueError(WARNING_MESSAGES["name_email"])
+
+    record_is = presence_name(com)
+    if record_is is not None and isinstance(record_is, abl.Record):
+        record_is.set_email(com[2])
+        contacts_book.add_record(record_is)
+        return message_notice(MESSAGES["add_email"])
+    else:
+        return message_warging(WARNING_MESSAGES["missing_name"])
+
+
 def birthdays(com, days=7):
     search_days = int(com[1]) if len(com) > 1 else days
     res = ""
@@ -270,12 +286,17 @@ COMMAND_HANDLER = {
     "search": search,
     "delete": delete,
     "daysbir": daysbir,
+    "add_email": add_email,
     "birthdays": birthdays,
     "add note": add_note,
     "search note": search_note,
     "add_address": add_address,
-    "help": help
+    "help": help,
+    "exit, close, good bye": message
 }
+
+# Completer for commands
+command_completer = WordCompleter(COMMAND_HANDLER.keys(), ignore_case=True)
 
 
 def command_handler(com):
@@ -287,17 +308,22 @@ def command_handler(com):
 def parsing(user_input):
     if user_input.startswith("show all"):
         return show_all("show_all")
-    if user_input.startswith("add_note"):
+    if user_input.startswith("add_email"):
+        # Pass the user input to add_email, not the string "add_email"
+        return add_email(user_input.split(" "))
+    if user_input.startswith("add note"):
         return add_note("add_note")
     if user_input.startswith("search note"):
         return search_note("search_note")
     if user_input.startswith("add_address"):
         return add_address(user_input.split(" "))
     return command_handler(user_input.split(" "))
+  
+  # Ensure command_handler receives lowercase input
+    ###return command_handler(user_input.lower().split(" "))
 
 
 def main():
-    # contacts_book.unserialization()
     serialization_full_data = serialize.Serialization().unserialization()
     full_content = serialization_full_data.get('full_content')
     if full_content != None:
@@ -305,11 +331,11 @@ def main():
         notes_book.data = full_content.get("notes")
 
     while True:
-        user_input = input("Input command >>> ")
+        # user_input = input("Input command >>> ")
+        user_input = prompt(">>> ", completer=command_completer) # input via command completer
         user_input = user_input.strip().lower()
         if user_input in EXIT_COMMANDS:
             print(exit(MESSAGES[user_input]))
-            # contacts_book.serialization()
             ob_serialize = serialize.Serialization()
             ob_serialize.serialization(contacts_book.data, notes_book)
             break
