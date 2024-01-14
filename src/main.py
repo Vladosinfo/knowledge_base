@@ -271,7 +271,8 @@ COMMAND_HANDLER = {
     "birthdays": birthdays,
     "add note": add_note,
     "search note": search_note,
-    "help": help
+    "help": help,
+    "exit, close, good bye": message
 }
 
 # Completer for commands

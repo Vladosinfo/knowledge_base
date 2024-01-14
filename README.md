@@ -24,14 +24,17 @@ Features
 Usage
 To use the application, follow these steps:
 Run the script (main.py).
-Choose options from the menu to perform various actions (hello, add, change, phone, show all, iter, search, delete, daysbir, birthdays, help).
+Choose options from the menu to perform various actions (hello, add, phone, change, change_birth, show all, iter, search, delete, daysbir, add_email, birthdays, add note, search note, help, exit, close, good bye).
 
 Installation
 1.Clone the repository:
 git clone https://github.com/Vladosinfo/knowledge_base
-2.Navigate to the project directory:
+2.Instalation in consol: 
+pip install -r requirements.txt,
+pip install prompt_toolkit.
+3.Navigate to the project directory:
 cd address-book
-3.Run the application:
+4.Run the application:
 python main.py
 
 Contributing
