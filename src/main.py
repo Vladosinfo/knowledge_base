@@ -1,16 +1,22 @@
 import address_book_lib as abl
+import notes_book_lib as nbl
+from classes.record_notes import RecordNotes
 import messages_settings as message
 import classes.exceptions as ex
 from messages_settings import MESSAGES, EXIT_COMMANDS, WARNING_MESSAGES, COMMAND_HANDLER_DESCRIPTION
+import helpers.general_helpers as helpeer
+import helpers.serialization as serialize
+from prompt_toolkit import prompt
+from prompt_toolkit.completion import WordCompleter
+
 
 contacts_book = abl.AddressBook()
+notes_book = nbl.NotesBook()
 
 RED = "\033[91m"
 GREEN = "\033[92m"
 BOLD = '\033[1m'
 RESET = "\033[0m"
-
-# some comment
 
 
 def message_notice(notice, color=None):
@@ -34,8 +40,10 @@ def input_error(func):
             return message_warging(f"Error: {err}")
         except ex.NotCorrectData as err:
             return message_warging(f"Error: {WARNING_MESSAGES['not_correct_data']}")
-        except ex.NotCorrectPhone as err:
-            return message_warging(f"Error: {WARNING_MESSAGES['not_correct_phone']}")
+        except ex.NotCorrectPhoneIsNotANumber as err:
+            return message_warging(f"Error: {WARNING_MESSAGES['not_correct_phone_is_not_a_number']}")
+        except ex.NotCorrectPhoneIsTwoShortOrLong as err:
+            return message_warging(f"Error: {WARNING_MESSAGES['not_correct_phone_short_long']}")
     return wrapper
 
 
@@ -132,6 +140,19 @@ def change(com):
 
 
 @input_error
+def change_birth(com):
+    if len(com) < 3:
+        raise ValueError(WARNING_MESSAGES["name_birth"])
+    birth_is = presence_name(com)
+    print(birth_is)
+    if birth_is:
+        birth_is.edit_birthday(com[2])
+        return message_notice(MESSAGES[com[0]])
+    else:
+        raise ValueError(WARNING_MESSAGES["missing_name"])
+
+
+@input_error
 def iter(com):
     contacts_book.list_creator()
     count = len(com)
@@ -192,6 +213,37 @@ def add_email(com):
     else:
         return message_warging(WARNING_MESSAGES["missing_name"])
 
+      
+def birthdays(com, days=7):
+    search_days = int(com[1]) if len(com) > 1 else days
+    res = ""
+    for item in contacts_book.values():
+        if item.date.value != None:
+            days_count = helpeer.list_days_to_birthday(item.date.value)
+            if days_count <= search_days:        
+                res += message_notice(f"{item.name.value.title()} after {days_count} day(s)\n", BOLD)
+                
+    if res != "":
+        return message_notice(MESSAGES["list_days_to_birthday"]+"\n", GREEN) + res
+    else:
+        return message_warging(WARNING_MESSAGES["no_list_days_to_birthday"])
+
+
+@input_error
+def add_note(com):
+    title = input("\tInput title note >>> ")
+    desc = input("\tInput description note >>> ")
+    note_title = title.strip()
+    note_desc = desc.strip()
+    note_record = RecordNotes(note_title, note_desc)
+    notes_book.add_record(note_record)
+
+
+@input_error
+def search_note(com):
+    # if len(com) >= 2:
+    notes_book.search()
+
 
 @input_error
 def help(com):
@@ -208,15 +260,22 @@ COMMAND_HANDLER = {
     "hello": message,
     "add": add,
     "change": change,
+    "change_birth": change_birth,
     "phone": phone,
     "show all": show_all,
     "iter": iter,
     "search": search,
     "delete": delete,
-    "daysbir": daysbir,  # Count days to bithday
+    "daysbir": daysbir,
     "add_email": add_email,
+    "birthdays": birthdays,
+    "add note": add_note,
+    "search note": search_note,
     "help": help
 }
+
+# Completer for commands
+command_completer = WordCompleter(COMMAND_HANDLER.keys(), ignore_case=True)
 
 
 def command_handler(com):
@@ -231,18 +290,32 @@ def parsing(user_input):
     if user_input.startswith("addemail"):
         # Pass the user input to add_email, not the string "add_email"
         return add_email(user_input.split(" "))
-    # Ensure command_handler receives lowercase input
-    return command_handler(user_input.lower().split(" "))
+    if user_input.startswith("add note"):
+        return add_note("add_note")
+    if user_input.startswith("search note"):
+        return search_note("search_note")
+    return command_handler(user_input.split(" "))
+  
+  # Ensure command_handler receives lowercase input
+    ###return command_handler(user_input.lower().split(" "))
 
 
 def main():
-    contacts_book.unserialization()
+    # contacts_book.unserialization()
+    serialization_full_data = serialize.Serialization().unserialization()
+    full_content = serialization_full_data.get('full_content')
+    contacts_book.data = full_content.get("contacts")
+    notes_book.data = full_content.get("notes")
+
     while True:
-        user_input = input("Input command >>> ")
+        # user_input = input("Input command >>> ")
+        user_input = prompt(">>>", completer=command_completer) # input via command completer
         user_input = user_input.strip().lower()
         if user_input in EXIT_COMMANDS:
             print(exit(MESSAGES[user_input]))
-            contacts_book.serialization()
+            # contacts_book.serialization()
+            ob_serialize = serialize.Serialization()
+            ob_serialize.serialization(contacts_book.data, notes_book)
             break
         res = parsing(user_input)
         print(res)
