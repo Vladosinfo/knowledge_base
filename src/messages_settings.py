@@ -50,5 +50,6 @@ COMMAND_HANDLER_DESCRIPTION = {
     "birthdays": "List of users whose birthday is close",
     "add note": "Add new note to dictionary notes",
     "search note": "Search notes",
-    "help": "List of commands"
+    "help": "List of commands",
+    "exit, close, good bye": "Close the program"
 }
