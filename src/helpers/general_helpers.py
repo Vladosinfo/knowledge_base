@@ -1,5 +1,6 @@
 from datetime import date, datetime
 
+
 def list_days_to_birthday(check_date):
     today = date.today()
     bdat = datetime.strptime(check_date, '%d-%m-%Y')

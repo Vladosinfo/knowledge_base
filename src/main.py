@@ -15,7 +15,6 @@ import clean_lib
 from prompt_toolkit import prompt
 from prompt_toolkit.completion import WordCompleter
 
-
 contacts_book = abl.AddressBook()
 notes_book = nbl.NotesBook()
 
@@ -54,7 +53,6 @@ def input_error(func):
             return message_warging(f"Error: {WARNING_MESSAGES['not_correct_phone_is_not_a_number']}")
         except ex.NotCorrectPhoneIsTwoShortOrLong as err:
             return message_warging(f"Error: {WARNING_MESSAGES['not_correct_phone_short_long']}")
-
     return wrapper
 
 
@@ -76,7 +74,6 @@ def add(com):
     count = len(com)
     if count < 3:
         raise ValueError(WARNING_MESSAGES["name_phone"])
-
     record_is = contacts_book.find(com[1])
     if record_is == None:
         if count > 3:
@@ -116,10 +113,8 @@ def show_all(com, search=None):
         cont = contacts_book_fullness()
         if cont != 1:
             return cont
-
         iter_Item = contacts_book
         message = com
-
     contacts = message_notice(MESSAGES[message])
     for val in iter_Item.values():
         contacts += "\n" + message_notice(f"{val}", BOLD)
@@ -131,7 +126,6 @@ def phone(com):
     cont = contacts_book_fullness()
     if cont != 1:
         return cont
-
     if len(com) < 2:
         raise ValueError(WARNING_MESSAGES["name"])
     name_is = presence_name(com)
@@ -169,7 +163,6 @@ def iter(com):
         items = contacts_book.iterator(int(com[1]), int(com[2]))
     else:
         items = contacts_book.iterator()
-
     if items != None:
         contacts = ""
         contacts += message_notice(MESSAGES[com[0]])
@@ -215,7 +208,6 @@ def daysbir(com):
 def add_address(com):
     if len(com) < 2:
         raise ValueError(WARNING_MESSAGES["name_address"])
-
     record_is = presence_name(com)
     if record_is is not None and isinstance(record_is, abl.Record):
 
@@ -251,7 +243,6 @@ def birthdays(com, days=7):
             days_count = helpeer.list_days_to_birthday(item.date.value)
             if days_count <= search_days:        
                 res += message_notice(f"{item.name.value.title()} after {days_count} day(s)\n", BOLD)
-                
     if res != "":
         return message_notice(MESSAGES["list_days_to_birthday"] + "\n", GREEN) + res
     else:
@@ -392,9 +383,6 @@ COMMAND_HANDLER = {
     "good bye": message
 }
 
-# Completer for commands
-command_completer = WordCompleter(COMMAND_HANDLER.keys(), ignore_case=True)
-
 
 def command_handler(com):
     handler = COMMAND_HANDLER.get(com[0], error)
@@ -406,7 +394,6 @@ def parsing(user_input):
     if user_input.startswith("show all"):
         return show_all("show_all")
     elif user_input.startswith("add_email"):
-        # Pass the user input to add_email, not the string "add_email"
         return add_email(user_input.split(" "))
     elif user_input.startswith("add_note"):
         return add_note("add_note")
@@ -424,6 +411,9 @@ def parsing(user_input):
         return add_address(user_input.split(" "))
     else:
         return command_handler(user_input.split(" "))
+
+# Completer for commands
+command_completer = WordCompleter(COMMAND_HANDLER.keys(), ignore_case=True)
 
 
 def main():

@@ -1,2 +1,2 @@
-.
+-e.
 prompt_toolkit

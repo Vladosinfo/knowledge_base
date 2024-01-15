@@ -7,25 +7,31 @@ class RecordNotes():
         self.description = description
         self.tags = title + " " + description
 
+
     @property
     def title(self):
         return self._title
-    
+
+
     @property
     def description(self):
         return self._description
-    
+
+
     @property
     def tags(self):
         return self._tags
     
+
     @title.setter
     def title(self, title):
         self._title = title.replace("#", "")
 
+
     @description.setter
     def description(self, description):
         self._description = description.replace("#", "")
+
 
     @tags.setter
     def tags(self, tags):
