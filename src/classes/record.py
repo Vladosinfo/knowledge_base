@@ -1,10 +1,10 @@
 from datetime import date, datetime
-from classes.name import Name
-from classes.phone import Phone
-from classes.birthday import Birthday
-from classes.exceptions import NotCorrectData
-from classes.address import Address
-from classes.email import Email
+from src.classes.name import Name
+from src.classes.phone import Phone
+from src.classes.birthday import Birthday
+from src.classes.exceptions import NotCorrectData
+from src.classes.address import Address
+from src.classes.email import Email
 
 
 class Record():
