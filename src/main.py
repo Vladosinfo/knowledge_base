@@ -341,7 +341,9 @@ COMMAND_HANDLER = {
     "delete_note": delete_note,   
     "add_address": add_address,
     "help": help,
-    "exit, close, good bye": message
+    "exit": message,
+    "close": message,
+    "good bye": message
 }
 
 # Completer for commands
