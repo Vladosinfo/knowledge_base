@@ -36,7 +36,6 @@ git clone https://github.com/Vladosinfo/knowledge_base
 2.Instalation in consol: 
 pip install -r requirements.txt.
 3.Navigate to the project directory:
-cd address-book
 4.Run the application:
 python main.py
 5.Run in CMD:
