@@ -365,7 +365,7 @@ def clean_dir(com):
 COMMAND_HANDLER = {
     "hello": message,
     "add_contact": add,
-    "add note": add_note,
+    "add_note": add_note,
     "add_email": add_email,
     "add_address": add_address,
     "change_phone": change,
@@ -408,7 +408,7 @@ def parsing(user_input):
     elif user_input.startswith("add_email"):
         # Pass the user input to add_email, not the string "add_email"
         return add_email(user_input.split(" "))
-    elif user_input.startswith("add note"):
+    elif user_input.startswith("add_note"):
         return add_note("add_note")
     elif user_input.startswith("show_all_notes"):
         return show_all_notes(user_input.split(" "))

@@ -68,7 +68,7 @@ COMMAND_HANDLER_DESCRIPTION = {
     "daysbir": "Count days to birthday",
     "add_email": "Add email to existing contact record",
     "birthdays": "List of users whose birthday is close",
-    "add note": "Add new note to dictionary notes",
+    "add_note": "Add new note to dictionary notes",
     "show_all_notes": "Show all notes",
     "search_contact": "Search contacts by name or phone",
     "search_note": "Search notes",
