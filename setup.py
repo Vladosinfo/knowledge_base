@@ -1,7 +1,7 @@
 from setuptools import setup, find_namespace_packages
 
 setup(
-    name='knowledge_base',
+    name='pocket_helper,',
     version='1.0.0',
     description='adressbook',
     url='https://github.com/Vladosinfo/knowledge_base',
@@ -10,5 +10,5 @@ setup(
     license='BSD',
     packages=find_namespace_packages(),
     install_requires=[],
-    entry_points={'console_scripts': ['bot-helper = src.main:main']},
+    entry_points={'console_scripts': ['pocket-helper = src.main:main']},
 )

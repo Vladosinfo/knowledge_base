@@ -46,6 +46,8 @@ COMMAND_HANDLER_DESCRIPTION = {
     "hello": "Greeting",
     "add": "Add new contact to address book",
     "change": "Change existing contact",
+    "change_email": "Change existing email",
+    "change_address": "Change existing address",
     "change_birth": "Change date of birth",
     "clean_dir": "Directory cleanup utility",
     "phone": "Find phone (item) by Name",
