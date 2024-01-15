@@ -35,6 +35,8 @@ pip install -r requirements.txt.
 cd address-book
 4.Run the application:
 python main.py
+5.Run in CMD:
+pocket-helper
 
 Contributing
 If you would like to contribute to the project, feel free to fork the repository and submit pull requests.
