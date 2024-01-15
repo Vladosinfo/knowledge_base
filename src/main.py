@@ -142,7 +142,7 @@ def phone(com):
 @input_error
 def change(com):
     if len(com) < 4:
-        raise ValueError(WARNING_MESSAGES["name_phone"])
+        raise ValueError(WARNING_MESSAGES["change_phone"])
     name_is = presence_name(com)
     if name_is != None:
         name_is.edit_phone(com[2], com[3])
@@ -188,11 +188,13 @@ def delete(com):
         return message_warging(WARNING_MESSAGES["missing_name"])
     else:
         contacts_book.delete(com[1])
-        return message_warging(MESSAGES["delete"])
+        return message_warging(MESSAGES["delete_contact"])
 
 
 @input_error
 def search(com):
+    if len(com) < 2:
+        raise ValueError(WARNING_MESSAGES["search_cont"])
     res = contacts_book.search(com[1])
     if res != 0:
         return show_all("show_all", res)
@@ -363,25 +365,28 @@ def clean_dir(com):
 
 COMMAND_HANDLER = {
     "hello": message,
-    "add": add,
-    "change": change,
-    "change_birth": change_birth,
-    "clean_dir": clean_dir,
-    "phone": phone,
-    "show all": show_all,
-    "iter": iter,
-    "search": search,
-    "delete": delete,
-    "daysbir": daysbir,
-    "add_email": add_email,
-    "birthdays": birthdays,
+    "add_contact": add,
     "add note": add_note,
+    "add_email": add_email,
+    "add_address": add_address,
+    "change_phone": change,
+    "change_birth": change_birth,
+    "change_email": add_email,
+    "change_address": add_address,
+    "clean_dir": clean_dir,
+    "find_contact": phone,
+    "show all": show_all,
     "show_all_notes": show_all_notes,
+    "iter_contacts": iter,
+    "search_contact": search,
     "search_note": search_note,
     "search_notes_by_tag": search_notes_by_tag,
-    "change_note": change_note,
-    "delete_note": delete_note,   
+    "change_note": change_note, 
     "add_address": add_address,
+    "delete_contact": delete,
+    "delete_note": delete_note,
+    "daysbir": daysbir,
+    "birthdays": birthdays,
     "help": help,
     "exit": message,
     "close": message,
