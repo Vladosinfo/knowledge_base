@@ -7,10 +7,10 @@ MESSAGES = {
     "add_more": "One more phone has been added",
     "added_address": "Address has been sucessfully added to your contact",
     "add_email": "Email succesfully added to your contact ",
-    "change": "Your contact has been changed",
+    "change_phone": "Your contact has been changed",
     "change_birth": "Birthday has been changed",
     "clean_dir": "",
-    "phone": "It's your phone number: ",
+    "find_contact": "It's your phone number: ",
     "show_all": "These are all contacts:",
     "show_found": "These are found contacts:",
     "delete": "Item has been deleted",
@@ -26,8 +26,9 @@ EXIT_COMMANDS = ["good bye", "close", "exit"]
 
 WARNING_MESSAGES = {
     "correct_command": "Enter correct command",
+    "change_phone": "Give me name, old_phone and new_phone. Syntax: >>> change_phone nameUser phoneNumber phoneNumber",
     "name": "Enter user name",
-    "name_email": " Give me email, please",
+    "name_email": " Give me email, please. Syntax: >>> add_email nameUser email",
     #"not_correct_phone": "Not correct phone",
     "name_phone": "Give me name and phone please. Syntax: >>> add nameUser phoneNumber",
     "name_address": "Give me address please. Syntax: >>> add_address nameUser",
@@ -45,12 +46,12 @@ WARNING_MESSAGES = {
 COMMAND_HANDLER_DESCRIPTION = {
     "hello": "Greeting",
     "add": "Add new contact to address book",
-    "change": "Change existing contact",
+    "change_phone": "Change existing contact",
     "change_email": "Change existing email",
     "change_address": "Change existing address",
     "change_birth": "Change date of birth",
     "clean_dir": "Directory cleanup utility",
-    "phone": "Find phone (item) by Name",
+    "find_contact": "Find phone (item) by Name",
     "show all": "Show_all contacts of address book",
     "iter": "Show parn of items from .. to ... Sintax of command: >>>iter (show count items by default); item 1 5",
     "search": "Search contacts by name or phone",
@@ -65,5 +66,7 @@ COMMAND_HANDLER_DESCRIPTION = {
     "delete_note": "Delete note by title. Write title of note.",
     "add_address": "Add address to existing contact",
     "help": "List of supported commands",
-    "exit, close, good bye": "Close the program"
+    "exit": "Close the program",
+    "close": "Close the program",
+    "good bye": "Close the program"
 }

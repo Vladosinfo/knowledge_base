@@ -138,7 +138,7 @@ def phone(com):
 @input_error
 def change(com):
     if len(com) < 4:
-        raise ValueError(WARNING_MESSAGES["name_phone"])
+        raise ValueError(WARNING_MESSAGES["change_phone"])
     name_is = presence_name(com)
     if name_is != None:
         name_is.edit_phone(com[2], com[3])
@@ -326,12 +326,12 @@ COMMAND_HANDLER = {
     "add note": add_note,
     "add_email": add_email,
     "add_address": add_address,
-    "change": change,
+    "change_phone": change,
     "change_birth": change_birth,
     "change_email": add_email,
     "change_address": add_address,
     "clean_dir": clean_dir,
-    "phone": phone,
+    "find_contact": phone,
     "show all": show_all,
     "show_all_notes": show_all_notes,
     "iter": iter,
