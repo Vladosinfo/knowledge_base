@@ -15,7 +15,11 @@ MESSAGES = {
     "show_found": "These are found contacts:",
     "delete": "Item has been deleted",
     "iter": "These are part of contacts",
-    "list_days_to_birthday": "List of nearest birthday"
+    "list_days_to_birthday": "List of nearest birthday",
+    "text_before_start": "Hello! Welcome to your Pocket Helper. For a quick start, enter space and see full list of commands that I can do.",
+    "list_notes": "List of notes:",
+    "list_notes_by_tag": "List notes searched by tag",
+    "list_notes_by_string": "List notes searched by string"
 }
 
 EXIT_COMMANDS = ["good bye", "close", "exit"]
@@ -53,8 +57,10 @@ COMMAND_HANDLER_DESCRIPTION = {
     "add_email": "Add email to existing record",
     "birthdays": "List of users whose birthday is close",
     "add note": "Add new note to dictionary notes",
-    "search note": "Search notes",
-    "search notes by tag": "Search notess by tag",    
+    "show_all_notes": "Show all notes",
+    "search_note": "Search notes",
+    "search_notes_by_tag": "Search notess by tag",
+    "delete_note": "Delete note by title. Write title of note.",
     "add_address": "Adding address to existing contact",
     "help": "List of commands",
     "exit, close, good bye": "Close the program"
