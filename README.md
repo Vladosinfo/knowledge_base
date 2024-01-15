@@ -24,7 +24,7 @@ Features
 Usage
 To use the application, follow these steps:
 Run the script (main.py).
-Choose options from the menu to perform various actions (hello, add, phone, change, change_birth, show all, iter, search, delete, daysbir, add_email, birthdays, add note, search note, help, exit, close, good bye).
+Choose options from the menu to perform various actions (hello, add_contact, add_note, add_email, add_address, change_phone, change_birth, change_email, change_address, clean_dir, find_contact, show_all, show_all_notes, iter_contacts, search_contact, search_note, search_notes_by_tag, delete_contact, delete_note, daysbir, birthdays, help, exit, close, good bye).
 
 Installation
 1.Clone the repository:
