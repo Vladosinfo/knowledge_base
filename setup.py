@@ -1,7 +1,7 @@
 from setuptools import setup, find_namespace_packages
 
 setup(
-    name='pocket_helper,',
+    name='pocket_helper',
     version='1.0.0',
     description='adressbook',
     url='https://github.com/Vladosinfo/knowledge_base',

@@ -2,16 +2,19 @@ from classes.field import Field
 import classes.exceptions as ex
 from time import strptime
 
+
 class Birthday(Field):
     def __init__(self, value):
         self._value = None
         self.value = value
         super().__init__(self._value)
 
+
     @property
     def value(self):
         return self._value
-    
+
+
     @Field.value.setter
     def value(self, value):
         if value == None:
@@ -22,3 +25,4 @@ class Birthday(Field):
                 self._value = value
             except ValueError:
                 raise ex.NotCorrectData
+            

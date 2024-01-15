@@ -3,10 +3,12 @@ import pickle
 from pathlib import Path
 import os
 
+
 class Serialization(UserDict):
     def __init__(self):
         self.__abook_file = "book_file.bin"
         self.data = {}
+
 
     def serialization(self, contacts_book, notes_book):
         self.data = dict(full_content = 
@@ -14,7 +16,6 @@ class Serialization(UserDict):
                 notes = notes_book
                 )
             )
-
         with open(self.__abook_file, "wb") as fh:
             pickle.dump(self.data, fh)
 
@@ -30,4 +31,3 @@ class Serialization(UserDict):
                     self.data = pickle.load(fh)
         return self.data
                
-

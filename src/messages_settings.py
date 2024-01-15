@@ -37,7 +37,6 @@ WARNING_MESSAGES = {
     "change_phone": "Give me name, old_phone and new_phone. Syntax: >>> change_phone nameUser phoneNumber phoneNumber",
     "name": "Enter user name",
     "name_email": " Give me email, please. Syntax: >>> add_email nameUser email",
-    #"not_correct_phone": "Not correct phone",
     "name_phone": "Give me name and phone please. Syntax: >>> add nameUser phoneNumber",
     "name_address": "Give me address please. Syntax: >>> add_address nameUser",
     "name_birth": "Give me name and new birthday. Syntax: >>> change_birth 'name' 'new_birth'",

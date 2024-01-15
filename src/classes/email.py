@@ -8,17 +8,19 @@ class Email(Field):
         self.value = email
         super().__init__(self._value)
 
+
     @property
     def value(self):
         return self._value
 
-    # @value.setter
+
     @Field.value.setter
     def value(self, email):
         if self.validate(email):
             self._value = email
         else:
             raise ValueError("Invalid email format")
+
 
     def validate(self, email):
         email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
