@@ -154,7 +154,6 @@ def change_birth(com):
     if len(com) < 3:
         raise ValueError(WARNING_MESSAGES["name_birth"])
     birth_is = presence_name(com)
-    print(birth_is)
     if birth_is:
         birth_is.edit_birthday(com[2])
         return message_notice(MESSAGES[com[0]])
