@@ -1,5 +1,5 @@
-from classes.field import Field
-import classes.exceptions as ex
+from src.classes.field import Field
+import src.classes.exceptions as ex
 
 
 class Phone(Field):

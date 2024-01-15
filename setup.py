@@ -10,5 +10,5 @@ setup(
     license='BSD',
     packages=find_namespace_packages(),
     install_requires=[],
-    entry_points={'console_scripts': ['pocket-helper = src.main:main']},
+    entry_points={'console_scripts': ['pocket_helper = src.main:main']},
 )

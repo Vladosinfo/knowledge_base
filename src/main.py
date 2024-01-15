@@ -1,19 +1,14 @@
-import address_book_lib as abl
-import notes_book_lib as nbl
-from classes.record_notes import RecordNotes
-import messages_settings as message
-import classes.exceptions as ex
-from messages_settings import (
-    MESSAGES,
-    EXIT_COMMANDS,
-    WARNING_MESSAGES,
-    COMMAND_HANDLER_DESCRIPTION,
-)
-import helpers.general_helpers as helpeer
-import helpers.serialization as serialize
-import clean_lib
-from prompt_toolkit import prompt
+import src.address_book_lib as abl
+import src.notes_book_lib as nbl
+from src.classes.record_notes import RecordNotes
+import src.messages_settings as message
+import src.classes.exceptions as ex
+import src.helpers.general_helpers as helpeer
+import src.helpers.serialization as serialize
+from src import clean_lib
+from src.messages_settings import (MESSAGES, EXIT_COMMANDS, WARNING_MESSAGES, COMMAND_HANDLER_DESCRIPTION,)
 from prompt_toolkit.completion import WordCompleter
+from prompt_toolkit import prompt
 
 contacts_book = abl.AddressBook()
 notes_book = nbl.NotesBook()
