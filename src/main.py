@@ -184,11 +184,13 @@ def delete(com):
         return message_warging(WARNING_MESSAGES["missing_name"])
     else:
         contacts_book.delete(com[1])
-        return message_warging(MESSAGES["delete"])
+        return message_warging(MESSAGES["delete_contact"])
 
 
 @input_error
 def search(com):
+    if len(com) < 2:
+        raise ValueError(WARNING_MESSAGES["search_cont"])
     res = contacts_book.search(com[1])
     if res != 0:
         return show_all("show_all", res)
@@ -322,7 +324,7 @@ def clean_dir(com):
 
 COMMAND_HANDLER = {
     "hello": message,
-    "add": add,
+    "add_contact": add,
     "add note": add_note,
     "add_email": add_email,
     "add_address": add_address,
@@ -334,11 +336,11 @@ COMMAND_HANDLER = {
     "find_contact": phone,
     "show all": show_all,
     "show_all_notes": show_all_notes,
-    "iter": iter,
-    "search": search,
+    "iter_contacts": iter,
+    "search_contact": search,
     "search_note": search_note,
     "search_notes_by_tag": search_notes_by_tag,
-    "delete": delete,
+    "delete_contact": delete,
     "delete_note": delete_note,
     "daysbir": daysbir,
     "birthdays": birthdays,
