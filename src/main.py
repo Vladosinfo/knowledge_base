@@ -34,6 +34,10 @@ def message_warging(warning):
     return f"{RED} {warning} {RESET}"
 
 
+def output_message(message):
+    print(message)
+
+
 def input_error(func):
     def wrapper(user_input):
         try:
@@ -288,6 +292,9 @@ def search_note(com):
 
 @input_error
 def search_notes_by_tag(com):
+    if len(com) < 2:
+        return message_warging(WARNING_MESSAGES["search_note_by_tag_id_empty"])
+
     search_notes = notes_book.search_by_tag(com[1])
     if len(search_notes) > 0:
         notes = message_notice(f"{MESSAGES['list_notes_by_tag']} - '{com[1]}':", GREEN)
@@ -296,6 +303,40 @@ def search_notes_by_tag(com):
     else:
         notes = message_notice(f"{MESSAGES['list_notes_by_tag']} - '{com[1]}': is empty.", GREEN)
     return notes
+
+
+@input_error
+def change_note(com):
+    note_for_change = input('\tEnter note that you want to change: >>> ')
+    search_res = notes_book.change_note(note_for_change)
+    if search_res == False:
+        return f"Note: '{note_for_change}', was not found."
+    else:
+        current_key = ""
+        current_title = ""
+        current_description = ""
+        current_tags = ""
+        for key, val in search_res.items():
+            current_key = key
+            current_title = val.title
+            current_description = val.description
+            current_tags = val.tags
+        output_message(message_notice(f"{MESSAGES['change_notes_note_add_tag1']}", GREEN))
+        output_message(message_notice(f"{MESSAGES['change_note_current_title']} {current_title}"))
+        title_note_for_change = input("\tEnter new title for change: >>> ")
+
+        output_message(message_notice(f"{MESSAGES['change_notes_note_add_tag2']}", GREEN))
+        output_message(message_notice(f"{MESSAGES['change_note_current_description']} {current_description}"))
+        description_note_for_change = input("\tEnter new description for change: >>> ")
+
+        output_message(message_notice(f"{MESSAGES['change_notes_note_add_tag3']}", GREEN))
+        output_message(message_notice(f"{MESSAGES['change_note_current_tags']} {current_tags}"))
+        tags_note_for_change = input(f"\t{MESSAGES['change_note_input_tags']} >>> ")
+        notes_book.delete(current_key)
+        note_record = RecordNotes(title_note_for_change, description_note_for_change, tags_note_for_change)
+        output_message(message_notice(f"{MESSAGES['changed_note']}", GREEN))
+        res = notes_book.add_record(note_record)
+    return res
 
 
 @input_error
@@ -340,6 +381,8 @@ COMMAND_HANDLER = {
     "search_contact": search,
     "search_note": search_note,
     "search_notes_by_tag": search_notes_by_tag,
+    "change_note": change_note, 
+    "add_address": add_address,
     "delete_contact": delete,
     "delete_note": delete_note,
     "daysbir": daysbir,
@@ -374,6 +417,8 @@ def parsing(user_input):
         return search_notes_by_tag(user_input.split(" "))
     elif user_input.startswith("search_note"):
         return search_note(user_input.split(" "))
+    elif user_input.startswith("change_note"):
+        return change_note(user_input.split(" "))
     elif user_input.startswith("delete_note"):
         return delete_note(user_input.split(" "))
     elif user_input.startswith("add_address"):

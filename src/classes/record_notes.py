@@ -1,8 +1,8 @@
 class RecordNotes():
-    def __init__(self, title, description):
+    def __init__(self, title, description, tags=None):
+        self._tags = tags.split(" ") if (tags != None and tags != "" ) else None
         self._title = None
         self._description = None
-        self._tags = None
         self.title = title
         self.description = description
         self.tags = title + " " + description
@@ -29,7 +29,8 @@ class RecordNotes():
 
     @tags.setter
     def tags(self, tags):
-        tags_from_text = []
+        # tags_from_text = []
+        tags_from_text = self._tags or []
         # tags_from_text = set()
         substring = '#'
         substrings = tags.split(substring)
