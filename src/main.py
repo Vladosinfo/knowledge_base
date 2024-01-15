@@ -27,7 +27,7 @@ RESET = "\033[0m"
 
 def message_notice(notice, color=None):
     color = color or GREEN
-    return f"{color} {notice} {RESET}"
+    return f"{color}{notice} {RESET}"
 
 
 def message_warging(warning):
@@ -116,8 +116,7 @@ def show_all(com, search=None):
         iter_Item = contacts_book
         message = com
 
-    contacts = ""
-    contacts += message_notice(MESSAGES[message])
+    contacts = message_notice(MESSAGES[message])
     for val in iter_Item.values():
         contacts += "\n" + message_notice(f"{val}", BOLD)
     return contacts
@@ -261,25 +260,55 @@ def add_note(com):
     note_title = title.strip()
     note_desc = desc.strip()
     note_record = RecordNotes(note_title, note_desc)
-    notes_book.add_record(note_record)
+    res = notes_book.add_record(note_record)
+    return res
 
 
 @input_error
+def show_all_notes(can):
+    notes = message_notice(f"{MESSAGES['list_notes']}", GREEN)
+    for val in notes_book.values():
+            notes += "\n" + message_notice(f"{val}", BOLD)
+    return notes
+
+
+@input_error 
 def search_note(com):
-    # if len(com) >= 2:
-    notes_book.search()
+    search_notes = notes_book.search(com[1])
+    if len(search_notes) > 0:
+        notes = message_notice(f"{MESSAGES['list_notes_by_string']} - '{com[1]}':", GREEN)
+        for val in search_notes.values():
+                notes += "\n" + message_notice(f"{val}", BOLD)
+    else:
+        notes = message_notice(f"{MESSAGES['list_notes_by_string']} - '{com[1]}': is empty.", GREEN)
+    return notes
+
 
 @input_error
 def search_notes_by_tag(com):
-    print("search notes by tag")
+    search_notes = notes_book.search_by_tag(com[1])
+    if len(search_notes) > 0:
+        notes = message_notice(f"{MESSAGES['list_notes_by_tag']} - '{com[1]}':", GREEN)
+        for val in search_notes.values():
+                notes += "\n" + message_notice(f"{val}", BOLD)
+    else:
+        notes = message_notice(f"{MESSAGES['list_notes_by_tag']} - '{com[1]}': is empty.", GREEN)
+    return notes
 
+
+@input_error
+def delete_note(com):
+    title = input("\tInput title that you want to delete: >>> ")
+    res = False
+    if title != "":
+        res = notes_book.delete(title)
+    return f"Notes: '{title}', has been successfully removed." if res else f"Notes: '{title}', was not found."
 
 
 @input_error
 def help(com):
     res = ""
     for command in COMMAND_HANDLER.keys():
-        # res += f"Command: {command}- description: {COMMAND_HANDLER_DESCRIPTION[command]}\n"
         res += message_notice(f"Command: {command}", GREEN)
         res += message_notice(f"- description: {COMMAND_HANDLER_DESCRIPTION[command]}\n", BOLD)
     return res
@@ -306,8 +335,10 @@ COMMAND_HANDLER = {
     "add_email": add_email,
     "birthdays": birthdays,
     "add note": add_note,
-    "search note": search_note,
-    "search notes by tag": search_notes_by_tag,    
+    "show_all_notes": show_all_notes,
+    "search_note": search_note,
+    "search_notes_by_tag": search_notes_by_tag, 
+    "delete_note": delete_note,   
     "add_address": add_address,
     "help": help,
     "exit, close, good bye": message
@@ -326,28 +357,23 @@ def command_handler(com):
 def parsing(user_input):
     if user_input.startswith("show all"):
         return show_all("show_all")
-    
-    if user_input.startswith("add_email"):
+    elif user_input.startswith("add_email"):
         # Pass the user input to add_email, not the string "add_email"
         return add_email(user_input.split(" "))
-    
-    if user_input.startswith("add note"):
+    elif user_input.startswith("add note"):
         return add_note("add_note")
-    
-    if user_input.startswith("search notes by tag"):
+    elif user_input.startswith("show_all_notes"):
+        return show_all_notes(user_input.split(" "))
+    elif user_input.startswith("search_notes_by_tag"):
         return search_notes_by_tag(user_input.split(" "))
-    
-    if user_input.startswith("search note"):
-        return search_note("search_note")
-
-    if user_input.startswith("add_address"):
+    elif user_input.startswith("search_note"):
+        return search_note(user_input.split(" "))
+    elif user_input.startswith("delete_note"):
+        return delete_note(user_input.split(" "))
+    elif user_input.startswith("add_address"):
         return add_address(user_input.split(" "))
-
-    return command_handler(user_input.split(" "))
-
-
-# Ensure command_handler receives lowercase input
-###return command_handler(user_input.lower().split(" "))
+    else:
+        return command_handler(user_input.split(" "))
 
 
 def main():
@@ -357,6 +383,7 @@ def main():
         contacts_book.data = full_content.get("contacts")
         notes_book.data = full_content.get("notes")
 
+    print(message_notice(MESSAGES["text_before_start"], GREEN))
     while True:
         # user_input = input("Input command >>> ")
         user_input = prompt(">>> ", completer=command_completer) # input via command completer
