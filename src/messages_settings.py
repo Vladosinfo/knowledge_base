@@ -19,7 +19,15 @@ MESSAGES = {
     "text_before_start": "Hello! Welcome to your Pocket Helper. For a quick start, enter space and see full list of commands that I can do.",
     "list_notes": "List of notes:",
     "list_notes_by_tag": "List notes searched by tag",
-    "list_notes_by_string": "List notes searched by string"
+    "list_notes_by_string": "List notes searched by string",
+    "change_notes_note_add_tag1": "Mark a word with the # symbol to make it a tag. (Example: 'Some #good news...')",
+    "change_notes_note_add_tag2": "Mark a word with the # symbol to make it a tag. (Example: 'Some #special information...')",
+    "change_notes_note_add_tag3": "You can enter more tags as desired 'words separated by spaces'. Or send empty string.",
+    "changed_note": "Notes that you changed.",
+    "change_note_input_tags": "Еnter more tags as desired 'words separated by spaces'. Or send empty string.:",
+    "change_note_current_title": "Current title:",
+    "change_note_current_description": "Current description:",
+    "change_note_current_tags": "Current list of tegs:"
 }
 
 EXIT_COMMANDS = ["good bye", "close", "exit"]
@@ -39,7 +47,8 @@ WARNING_MESSAGES = {
     "iter_no_result": "There are no records in this range",
     "show_found_empty": "Search did not return any results.",
     "not_correct_data": "Not correct data. Expected syntax: add nameUser 21-12-2021 phoneNumber",
-    "no_list_days_to_birthday": "No birthdays in the near future"
+    "no_list_days_to_birthday": "No birthdays in the near future",
+    "search_note_by_tag_id_empty": "Input tag for search note"
 }
 
 COMMAND_HANDLER_DESCRIPTION = {
@@ -60,6 +69,7 @@ COMMAND_HANDLER_DESCRIPTION = {
     "show_all_notes": "Show all notes",
     "search_note": "Search notes",
     "search_notes_by_tag": "Search notes by tag",
+    "change_note": "Change note",
     "delete_note": "Delete note by title. Write title of note.",
     "add_address": "Add address to existing contact",
     "help": "List of supported commands",

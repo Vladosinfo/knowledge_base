@@ -29,6 +29,13 @@ class NotesBook(UserDict):
         return search_notes
 
 
+    def change_note(self, note):
+        for key, val in self.data.items():
+            if key.lower() == note.lower():
+                return {key : val}
+        return False        
+
+
     def delete(self, del_title):
         for title in self.data.keys():
             if title == del_title:
