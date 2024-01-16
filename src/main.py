@@ -1,17 +1,12 @@
-import address_book_lib as abl
-import notes_book_lib as nbl
-from classes.record_notes import RecordNotes
-import messages_settings as message
-import classes.exceptions as ex
-from messages_settings import (
-    MESSAGES,
-    EXIT_COMMANDS,
-    WARNING_MESSAGES,
-    COMMAND_HANDLER_DESCRIPTION,
-)
-import helpers.general_helpers as helpeer
-import helpers.serialization as serialize
-import clean_lib
+import src.address_book_lib as abl
+import src.notes_book_lib as nbl
+import src.messages_settings as message
+import src.classes.exceptions as ex
+import src.helpers.general_helpers as helpeer
+import src.helpers.serialization as serialize
+from src import clean_lib
+from src.classes.record_notes import RecordNotes
+from src.messages_settings import (MESSAGES, EXIT_COMMANDS, WARNING_MESSAGES, COMMAND_HANDLER_DESCRIPTION)
 from prompt_toolkit import prompt
 from prompt_toolkit.completion import WordCompleter
 
@@ -180,7 +175,7 @@ def delete(com):
         return message_warging(WARNING_MESSAGES["missing_name"])
     else:
         contacts_book.delete(com[1])
-        return message_warging(MESSAGES["delete_contact"])
+        return message_notice(MESSAGES["delete_contact"], GREEN)
 
 
 @input_error
@@ -372,9 +367,8 @@ COMMAND_HANDLER = {
     "search_note": search_note,
     "search_notes_by_tag": search_notes_by_tag,
     "change_note": change_note, 
-    "add_address": add_address,
-    "delete_contact": delete,
     "delete_note": delete_note,
+    "delete_contact": delete,
     "daysbir": daysbir,
     "birthdays": birthdays,
     "help": help,
