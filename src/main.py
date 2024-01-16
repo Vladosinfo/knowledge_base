@@ -70,7 +70,7 @@ def add(com):
     if count < 3:
         raise ValueError(WARNING_MESSAGES["name_phone"])
     record_is = contacts_book.find(com[1])
-    if record_is == None:
+    if record_is is None:
         if count > 3:
             record = abl.Record(com[1], com[2])
             record.add_phone(com[3])
@@ -94,14 +94,14 @@ def contacts_book_fullness():
 
 def presence_name(com):
     contact = contacts_book.find(com[1])
-    if contact == None:
+    if contact is None:
         raise ValueError(WARNING_MESSAGES["missing_name"])
     else:
         return contact
 
 
 def show_all(com, search=None):
-    if search != None:
+    if search is not None:
         iter_Item = search
         message = "show_found"
     else:
@@ -122,9 +122,9 @@ def phone(com):
     if cont != 1:
         return cont
     if len(com) < 2:
-        raise ValueError(WARNING_MESSAGES["name"])
+        raise ValueError(WARNING_MESSAGES["find"])
     name_is = presence_name(com)
-    if name_is != None:
+    if name_is is not None:
         return message_notice(f"{MESSAGES[com[0]]}{contacts_book[com[1]]}", BOLD)
 
 
@@ -133,7 +133,7 @@ def change(com):
     if len(com) < 4:
         raise ValueError(WARNING_MESSAGES["change_phone"])
     name_is = presence_name(com)
-    if name_is != None:
+    if name_is is not None:
         name_is.edit_phone(com[2], com[3])
         return message_notice(MESSAGES[com[0]])
 
@@ -158,7 +158,7 @@ def iter(com):
         items = contacts_book.iterator(int(com[1]), int(com[2]))
     else:
         items = contacts_book.iterator()
-    if items != None:
+    if items is not None:
         contacts = ""
         contacts += message_notice(MESSAGES[com[0]])
         for item in items:
@@ -171,7 +171,7 @@ def iter(com):
 @input_error
 def delete(com):
     res = contacts_book.find(com[1])
-    if res == None:
+    if res is None:
         return message_warging(WARNING_MESSAGES["missing_name"])
     else:
         contacts_book.delete(com[1])
@@ -192,7 +192,7 @@ def search(com):
 @input_error
 def daysbir(com):
     contact = contacts_book.find(com[1])
-    if contact == None:
+    if contact is None:
         return message_warging(WARNING_MESSAGES["missing_name"])
     else:
         res = contact.days_to_birthday()
@@ -234,9 +234,9 @@ def birthdays(com, days=7):
     search_days = int(com[1]) if len(com) > 1 else days
     res = ""
     for item in contacts_book.values():
-        if item.date.value != None:
+        if item.date.value is not None:
             days_count = helpeer.list_days_to_birthday(item.date.value)
-            if days_count <= search_days:        
+            if days_count <= search_days:
                 res += message_notice(f"{item.name.value.title()} after {days_count} day(s)\n", BOLD)
     if res != "":
         return message_notice(MESSAGES["list_days_to_birthday"] + "\n", GREEN) + res
@@ -259,17 +259,17 @@ def add_note(com):
 def show_all_notes(can):
     notes = message_notice(f"{MESSAGES['list_notes']}", GREEN)
     for val in notes_book.values():
-            notes += "\n" + message_notice(f"{val}", BOLD)
+        notes += "\n" + message_notice(f"{val}", BOLD)
     return notes
 
 
-@input_error 
+@input_error
 def search_note(com):
     search_notes = notes_book.search(com[1])
     if len(search_notes) > 0:
         notes = message_notice(f"{MESSAGES['list_notes_by_string']} - '{com[1]}':", GREEN)
         for val in search_notes.values():
-                notes += "\n" + message_notice(f"{val}", BOLD)
+            notes += "\n" + message_notice(f"{val}", BOLD)
     else:
         notes = message_notice(f"{MESSAGES['list_notes_by_string']} - '{com[1]}': is empty.", GREEN)
     return notes
@@ -284,7 +284,7 @@ def search_notes_by_tag(com):
     if len(search_notes) > 0:
         notes = message_notice(f"{MESSAGES['list_notes_by_tag']} - '{com[1]}':", GREEN)
         for val in search_notes.values():
-                notes += "\n" + message_notice(f"{val}", BOLD)
+            notes += "\n" + message_notice(f"{val}", BOLD)
     else:
         notes = message_notice(f"{MESSAGES['list_notes_by_tag']} - '{com[1]}': is empty.", GREEN)
     return notes
@@ -294,7 +294,7 @@ def search_notes_by_tag(com):
 def change_note(com):
     note_for_change = input('\tEnter note that you want to change: >>> ')
     search_res = notes_book.change_note(note_for_change)
-    if search_res == False:
+    if search_res is False:
         return f"Note: '{note_for_change}', was not found."
     else:
         current_key = ""
@@ -366,7 +366,7 @@ COMMAND_HANDLER = {
     "search_contact": search,
     "search_note": search_note,
     "search_notes_by_tag": search_notes_by_tag,
-    "change_note": change_note, 
+    "change_note": change_note,
     "delete_note": delete_note,
     "delete_contact": delete,
     "daysbir": daysbir,
@@ -406,6 +406,7 @@ def parsing(user_input):
     else:
         return command_handler(user_input.split(" "))
 
+
 # Completer for commands
 command_completer = WordCompleter(COMMAND_HANDLER.keys(), ignore_case=True)
 
@@ -413,14 +414,14 @@ command_completer = WordCompleter(COMMAND_HANDLER.keys(), ignore_case=True)
 def main():
     serialization_full_data = serialize.Serialization().unserialization()
     full_content = serialization_full_data.get('full_content')
-    if full_content != None:
+    if full_content is not None:
         contacts_book.data = full_content.get("contacts")
         notes_book.data = full_content.get("notes")
 
     print(message_notice(MESSAGES["text_before_start"], GREEN))
     while True:
         # user_input = input("Input command >>> ")
-        user_input = prompt(">>> ", completer=command_completer) # input via command completer
+        user_input = prompt(">>> ", completer=command_completer)
         user_input = user_input.strip().lower()
         if user_input in EXIT_COMMANDS:
             print(exit(MESSAGES[user_input]))

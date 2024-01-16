@@ -8,17 +8,15 @@ class Phone(Field):
         self.value = value
         super().__init__(self._value)
 
-
     @property
     def value(self):
         return self._value
 
-
-    @Field.value.setter   
+    @Field.value.setter
     def value(self, phone):
         numeric_phone = ''.join(filter(str.isdigit, phone))
         if numeric_phone.isdigit():
-            if  len(numeric_phone) == 9:
+            if len(numeric_phone) == 9:
                 self._value = f"+380{numeric_phone}"
             elif len(numeric_phone) == 10:
                 self._value = f"+38{numeric_phone}"
@@ -28,7 +26,6 @@ class Phone(Field):
                 raise ex.NotCorrectPhoneIsTwoShortOrLong
         else:
             raise ex.NotCorrectPhoneIsNotANumber
-        
 
     def validate(self, phone):
         numeric_phone = ''.join(filter(str.isdigit, phone))
@@ -38,4 +35,3 @@ class Phone(Field):
             elif len(numeric_phone) == 9 or 10 <= len(numeric_phone) <= 13:
                 return True
         return False
-    

@@ -8,10 +8,8 @@ class AddressBook(UserDict):
         self.list_count = 0
         self.data = {}
 
-
     def add_record(self, value):
         self.data[value.name.value] = value
-
 
     def find(self, name):
         if name in self.data.keys():
@@ -21,11 +19,9 @@ class AddressBook(UserDict):
         else:
             return None
 
-
     def delete(self, name):
         if name in self.data.keys():
             self.data.pop(name)
-
 
     def list_creator(self):
         self.list_items = []
@@ -33,11 +29,9 @@ class AddressBook(UserDict):
             self.list_items.append(item)
         self.list_count = len(self.list_items)
 
-
     def iterator(self, from_el=0, to_el=2):
         if self.list_count > 0 and from_el < self.list_count:
             return (x for x in self.list_items[from_el:to_el])
-
 
     def search(self, str):
         searched_items = {}
