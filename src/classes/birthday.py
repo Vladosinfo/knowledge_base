@@ -9,15 +9,13 @@ class Birthday(Field):
         self.value = value
         super().__init__(self._value)
 
-
     @property
     def value(self):
         return self._value
 
-
     @Field.value.setter
     def value(self, value):
-        if value == None:
+        if value is None:
             self._value = None
         else:
             try:
@@ -25,4 +23,3 @@ class Birthday(Field):
                 self._value = value
             except ValueError:
                 raise ex.NotCorrectData
-            

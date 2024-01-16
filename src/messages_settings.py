@@ -34,7 +34,8 @@ EXIT_COMMANDS = ["good bye", "close", "exit"]
 
 WARNING_MESSAGES = {
     "correct_command": "Enter correct command",
-    "change_phone": "Give me name, old_phone and new_phone. Syntax: >>> change_phone nameUser phoneNumber phoneNumber",
+    "change_phone": "Give me name, old_phone and new_phone. \
+    Syntax: >>> change_phone nameUser phoneNumber phoneNumber",
     "name": "Enter user name",
     "name_email": " Give me email, please. Syntax: >>> add_email nameUser email",
     "name_phone": "Give me name and phone please. Syntax: >>> add nameUser phoneNumber",
@@ -42,6 +43,7 @@ WARNING_MESSAGES = {
     "name_birth": "Give me name and new birthday. Syntax: >>> change_birth 'name' 'new_birth'",
     "not_correct_phone_is_not_a_number": "Pleace, put a number",
     "not_correct_phone_short_long": "Pleace, put more than 9 numebres, but no more than 13",
+    "find": "Give me name which you want to find. Syntax: >>> find_contact nameUser",
     "missing_name": "This name is missing in contact book",
     "contacts_book_empty": "Contacts book is empty yet.",
     "iter_no_result": "There are no records in this range",
@@ -62,7 +64,8 @@ COMMAND_HANDLER_DESCRIPTION = {
     "clean_dir": "Directory cleanup utility",
     "find_contact": "Find phone (item) by Name",
     "show all": "Show_all contacts of address book",
-    "iter_contacts": "Show parn of items from .. to ... Sintax of command: >>>iter (show count items by default); item 1 5",
+    "iter_contacts": "Show parn of items from .. to ... \
+    Sintax of command: >>>iter (show count items by default); item 1 5",
     "delete_contact": "Delete contact",
     "daysbir": "Count days to birthday",
     "add_email": "Add email to existing contact record",

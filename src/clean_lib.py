@@ -164,9 +164,9 @@ def sort_files(if_prnt):
                 if if_prnt:
                     print(f"Empty {folder_path} deleted")
 
-    print(f"Files sorted successfully")
+    print("Files sorted successfully")
     if if_prnt:
-        print(f"Files moved to new folders based on extensions:")
+        print("Files moved to new folders based on extensions:")
         for key, value in categories.items():
             if file_moved[key]:
                 print(f"{key} {value}:")

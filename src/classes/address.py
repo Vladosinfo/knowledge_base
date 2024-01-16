@@ -7,11 +7,9 @@ class Address(Field):
         self.value = value
         super().__init__(self._value)
 
-
     @property
     def value(self):
         return self.value
-
 
     @Field.value.setter
     def value(self, value):
