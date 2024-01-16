@@ -4,7 +4,7 @@ MESSAGES = {
     "close": "Good bye!",
     "exit": "Good bye!",
     "add_contact": "Your contact has been added",
-    "add_more": "One more phone has been added",
+    "add_contact_more": "One more phone has been added",
     "added_address": "Address has been sucessfully added to your contact",
     "add_email": "Email succesfully added to your contact ",
     "change_phone": "Your contact has been changed",

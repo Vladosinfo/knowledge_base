@@ -1,5 +1,4 @@
 from collections import UserDict
-# from src.classes.record_notes import RecordNotes
 
 
 class NotesBook(UserDict):

@@ -175,7 +175,7 @@ def delete(com):
         return message_warging(WARNING_MESSAGES["missing_name"])
     else:
         contacts_book.delete(com[1])
-        return message_warging(MESSAGES["delete_contact"])
+        return message_notice(MESSAGES["delete_contact"], GREEN)
 
 
 @input_error
@@ -367,9 +367,8 @@ COMMAND_HANDLER = {
     "search_note": search_note,
     "search_notes_by_tag": search_notes_by_tag,
     "change_note": change_note, 
-    "add_address": add_address,
-    "delete_contact": delete,
     "delete_note": delete_note,
+    "delete_contact": delete,
     "daysbir": daysbir,
     "birthdays": birthdays,
     "help": help,

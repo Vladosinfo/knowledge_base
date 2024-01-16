@@ -1,6 +1,4 @@
 from collections import UserDict
-# import pickle
-# from pathlib import Path
 from src.classes.record import Record
 
 
@@ -51,7 +49,3 @@ class AddressBook(UserDict):
                 if phone.value.find(str) != -1:
                     searched_items.update({val: key})
         return searched_items if len(searched_items) > 0 else 0
-
-
-    # def help(self):
-    #     return 
