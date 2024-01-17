@@ -49,6 +49,7 @@ WARNING_MESSAGES = {
     "iter_no_result": "There are no records in this range",
     "show_found_empty": "Search did not return any results.",
     "search_cont": "Give me some text or digit",
+    "search_note": "Give me some text",
     "not_correct_data": "Not correct data. Expected syntax: add nameUser 21-12-2021 phoneNumber",
     "no_list_days_to_birthday": "No birthdays in the near future",
     "search_note_by_tag_id_empty": "Input tag for search note"
