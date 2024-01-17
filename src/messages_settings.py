@@ -5,8 +5,8 @@ MESSAGES = {
     "exit": "Good bye!",
     "add_contact": "Your contact has been added",
     "add_contact_more": "One more phone has been added",
-    "added_address": "Address has been sucessfully added to your contact",
-    "add_email": "Email succesfully added to your contact ",
+    "added_address": "Address has been successfully added to your contact",
+    "add_email": "Email successfully added to your contact ",
     "change_phone": "Your contact has been changed",
     "change_birth": "Birthday has been changed",
     "clean_dir": "",
@@ -15,7 +15,7 @@ MESSAGES = {
     "show_found": "These are found contacts:",
     "delete_contact": "Item has been deleted",
     "iter_contacts": "These are part of contacts",
-    "list_days_to_birthday": "List of nearest birthday",
+    "list_days_to_birthday": "List of nearest birthdays",
     "text_before_start": "Hello! Welcome to your Pocket Helper. For a quick start, enter space and see full list of commands that I can do.",
     "list_notes": "List of notes:",
     "list_notes_by_tag": "List notes searched by tag",
@@ -24,25 +24,25 @@ MESSAGES = {
     "change_notes_note_add_tag2": "Mark a word with the # symbol to make it a tag. (Example: 'Some #special information...')",
     "change_notes_note_add_tag3": "You can enter more tags as desired 'words separated by spaces'. Or send empty string.",
     "changed_note": "Notes that you changed.",
-    "change_note_input_tags": "Еnter more tags as desired 'words separated by spaces'. Or send empty string.:",
+    "change_note_input_tags": "Enter more tags as desired 'words separated by spaces'. Or send empty string.:",
     "change_note_current_title": "Current title:",
     "change_note_current_description": "Current description:",
-    "change_note_current_tags": "Current list of tegs:"
+    "change_note_current_tags": "Current list of tags:"
 }
 
 EXIT_COMMANDS = ["good bye", "close", "exit"]
 
 WARNING_MESSAGES = {
     "correct_command": "Enter correct command",
-    "change_phone": "Give me name, old_phone and new_phone. \
+    "change_phone": "Give me name, old phone and new_phone. \
     Syntax: >>> change_phone nameUser phoneNumber phoneNumber",
     "name": "Enter user name",
     "name_email": " Give me email, please. Syntax: >>> add_email nameUser email",
     "name_phone": "Give me name and phone please. Syntax: >>> add nameUser phoneNumber",
-    "name_address": "Give me address please. Syntax: >>> add_address nameUser",
+    "name_address": "Give me name please. Syntax: >>> add_address nameUser",
     "name_birth": "Give me name and new birthday. Syntax: >>> change_birth 'name' 'new_birth'",
-    "not_correct_phone_is_not_a_number": "Pleace, put a number",
-    "not_correct_phone_short_long": "Pleace, put more than 9 numebres, but no more than 13",
+    "not_correct_phone_is_not_a_number": "Please, put a number",
+    "not_correct_phone_short_long": "Please, put more than 9 numebres, but no more than 13",
     "find": "Give me name which you want to find. Syntax: >>> find_contact nameUser",
     "missing_name": "This name is missing in contact book",
     "contacts_book_empty": "Contacts book is empty yet.",
@@ -64,7 +64,7 @@ COMMAND_HANDLER_DESCRIPTION = {
     "clean_dir": "Directory cleanup utility",
     "find_contact": "Find phone (item) by Name",
     "show all": "Show_all contacts of address book",
-    "iter_contacts": "Show parn of items from .. to ... \
+    "iter_contacts": "Show part of items from ... to ... \
     Sintax of command: >>>iter (show count items by default); item 1 5",
     "delete_contact": "Delete contact",
     "daysbir": "Count days to birthday",
