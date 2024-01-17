@@ -265,6 +265,8 @@ def show_all_notes(can):
 
 @input_error
 def search_note(com):
+    if len(com) < 2:
+        raise ValueError(WARNING_MESSAGES["search_note"])
     search_notes = notes_book.search(com[1])
     if len(search_notes) > 0:
         notes = message_notice(f"{MESSAGES['list_notes_by_string']} - '{com[1]}':", GREEN)
